@@ -14,7 +14,7 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/></svg>
 </button>
 <div class="toc-panel" id="toc-panel">
-  <h4>Sumário · 28 slides</h4>
+  <h4>Sumário · 29 slides</h4>
   <ul class="toc-list">
     <li class="toc-item" data-goto="0"><span class="toc-num">01</span><span>Now Playing · Spotify × Nielsen</span></li>
     <li class="toc-item" data-goto="1"><span class="toc-num">02</span><span>Sumário · Playlist</span></li>
@@ -43,7 +43,8 @@
     <li class="toc-item" data-goto="24"><span class="toc-num">25</span><span>Heurísticas mais violadas</span></li>
     <li class="toc-item" data-goto="25"><span class="toc-num">26</span><span>Distribuição por severidade</span></li>
     <li class="toc-item" data-goto="26"><span class="toc-num">27</span><span>Padrões e trade-offs</span></li>
-    <li class="toc-item" data-goto="27"><span class="toc-num">28</span><span>Wrapped final · Resumo</span></li>
+    <li class="toc-item" data-goto="27"><span class="toc-num">28</span><span>Quer ir mais fundo · NN/g</span></li>
+    <li class="toc-item" data-goto="28"><span class="toc-num">29</span><span>Wrapped final · Resumo</span></li>
   </ul>
 </div>
 
@@ -53,7 +54,7 @@
 
 <button class="nav-btn" id="nav-prev" aria-label="Slide anterior">‹</button>
 <button class="nav-btn" id="nav-next" aria-label="Próximo slide">›</button>
-<div id="counter">1 / 28</div>
+<div id="counter">1 / 29</div>
 
 <div id="pres">
   <div id="viewport">
@@ -966,33 +967,76 @@
         <div class="corner-num">13</div>
       </div>
 
-      <!-- ═══ SLIDE 15 — PROBLEMAS 2.1 a 2.4 (DESCOBRIBILIDADE) ═══ -->
+      <!-- ═══ SLIDE 14 — DESCOBRIBILIDADE (P 2.1 a 2.4 com thumbnails) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f2-playlists.png') center/cover #0d6b40;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F2 · Gerenciamento de Playlists</span>
+          </div>
+
           <div class="slide-tag">F2 · Bloco descobribilidade · 4 problemas</div>
-          <h2 class="section" style="font-size:30px;">Descobribilidade: o que está oculto</h2>
+          <h2 class="section" style="font-size:28px;">Descobribilidade: o que está oculto</h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <div class="card" style="border-left:3px solid var(--amber);">
-              <div style="display:flex;justify-content:space-between;align-items:center;"><span class="card-title" style="color:var(--amber2);">P 2.1 · Pastas sem personalização visual</span><span class="sev sev-1">1</span></div>
-              <div class="card-body">Pastas exibidas com ícone genérico — playlists aceitam capa, pastas não. <span class="hl-amber">Inconsistência interna</span> (H4).</div>
+
+          <div class="disc-grid">
+            <div class="card disc-card" style="border-left:3px solid var(--amber);">
+              <div class="disc-thumb" data-caption="P 2.1 · Pastas com ícone genérico, sem personalização visual" tabindex="0" role="button" aria-label="Abrir foto P 2.1">
+                <img src="images/hi-res/problema-2.1-pastas.jpg" alt="Pasta no Spotify com ícone genérico padrão">
+              </div>
+              <div class="disc-content">
+                <div class="disc-head">
+                  <span class="disc-title" style="color:var(--amber2);">P 2.1 · Pastas sem personalização</span>
+                  <span class="sev sev-1">1</span>
+                </div>
+                <div class="disc-body">Pastas com ícone genérico — playlists aceitam capa, pastas não. <span class="hl-amber">Inconsistência</span> (H4).</div>
+              </div>
             </div>
-            <div class="card" style="border-left:3px solid #ff8c00;">
-              <div style="display:flex;justify-content:space-between;align-items:center;"><span class="card-title" style="color:#ffb86c;">P 2.2 · Menu de 12+ opções, sem agrupamento</span><span class="sev sev-3">3</span></div>
-              <div class="card-body">Drawer do menu de três pontos abre lista linear, sem hierarquia, sem destaque para ações destrutivas, scroll oculto. <strong style="color:var(--ink);">3 avaliadores reportaram.</strong></div>
+
+            <div class="card disc-card" style="border-left:3px solid #ff8c00;">
+              <div class="disc-thumb" data-caption="P 2.2 · Drawer com lista extensa de opções sem agrupamento" tabindex="0" role="button" aria-label="Abrir foto P 2.2">
+                <img src="images/hi-res/problema-2.2-menu-playlist.jpg" alt="Drawer do menu da playlist com 12+ opções sem hierarquia">
+              </div>
+              <div class="disc-content">
+                <div class="disc-head">
+                  <span class="disc-title" style="color:#ffb86c;">P 2.2 · Menu de 12+ opções</span>
+                  <span class="sev sev-3">3</span>
+                </div>
+                <div class="disc-body">Drawer abre lista linear, sem hierarquia, sem destaque para ações destrutivas, scroll oculto. <strong style="color:var(--ink);">3 avaliadores reportaram.</strong></div>
+              </div>
             </div>
-            <div class="card" style="border-left:3px solid #ff8c00;">
-              <div style="display:flex;justify-content:space-between;align-items:center;"><span class="card-title" style="color:#ffb86c;">P 2.3 · Carrossel oculta ações</span><span class="sev sev-1">1</span></div>
-              <div class="card-body">Barra horizontal "Add · Mix · Edit · Sort" sem affordance de scroll — opções extras só aparecem se o usuário <em class="it">acertar</em> o gesto.</div>
+
+            <div class="card disc-card" style="border-left:3px solid var(--amber);">
+              <div class="disc-thumb" data-caption="P 2.3 · Carrossel horizontal com último item parcialmente cortado" tabindex="0" role="button" aria-label="Abrir foto P 2.3">
+                <img src="images/hi-res/problema-2.3-carrossel.jpg" alt="Barra de ações rápidas em carrossel horizontal">
+              </div>
+              <div class="disc-content">
+                <div class="disc-head">
+                  <span class="disc-title" style="color:var(--amber2);">P 2.3 · Carrossel oculta ações</span>
+                  <span class="sev sev-1">1</span>
+                </div>
+                <div class="disc-body">Barra "Add · Mix · Edit · Sort" sem affordance de scroll — opções extras só aparecem se o usuário <em class="it">acertar</em> o gesto.</div>
+              </div>
             </div>
-            <div class="card" style="border-left:3px solid var(--red);">
-              <div style="display:flex;justify-content:space-between;align-items:center;"><span class="card-title" style="color:var(--red2);">P 2.4 · "Find in playlist" invisível</span><span class="sev sev-2">2</span></div>
-              <div class="card-body">Campo de busca interno só acessível via <strong style="color:var(--ink);">pull-down</strong> — gesto sem indicador visual algum. Quase um Easter egg.</div>
+
+            <div class="card disc-card" style="border-left:3px solid #ff8c00;">
+              <div class="disc-thumb" data-caption="P 2.4 · Campo 'Find in playlist' revelado apenas após pull-down" tabindex="0" role="button" aria-label="Abrir foto P 2.4">
+                <img src="images/hi-res/problema-2.4-find-in-playlist.jpg" alt="Campo de busca interno da playlist acessível só por pull-down">
+              </div>
+              <div class="disc-content">
+                <div class="disc-head">
+                  <span class="disc-title" style="color:#ffb86c;">P 2.4 · "Find in playlist" invisível</span>
+                  <span class="sev sev-2">2</span>
+                </div>
+                <div class="disc-body">Campo de busca interno só acessível via <strong style="color:var(--ink);">pull-down</strong> — gesto sem indicador visual algum. Quase um Easter egg.</div>
+              </div>
             </div>
           </div>
-          <p class="attr" style="margin-top:14px;">Padrão comum: <span class="hl">minimalismo estético</span> sacrificando <span class="hl">descobribilidade</span>. H1 e H5 estão em todos.</p>
+
+          <p class="attr" style="margin-top:12px;">Padrão comum: <span class="hl">minimalismo estético</span> sacrificando <span class="hl">descobribilidade</span>. H1 e H5 estão em todos.</p>
         </div>
-        <div class="corner-num">15</div>
+        <div class="corner-num">14</div>
       </div>
 
       <!-- ═══ SLIDE 16 — PROBLEMA 2.5 ═══ -->
@@ -1548,6 +1592,49 @@
           </div>
         </div>
         <div class="corner-num">28</div>
+      </div>
+
+      <!-- ═══ SLIDE 29 — QUER IR MAIS FUNDO? (RECURSOS · NN/g) ═══ -->
+      <div class="slide s-dark">
+        <div class="slide-inner">
+          <div class="slide-tag">Recursos · Para saber mais</div>
+          <h2 class="section">Quer ir mais fundo?</h2>
+          <div class="divider"></div>
+          <p class="attr" style="margin:0 0 18px;max-width:880px;">
+            As 10 heurísticas vêm da <span class="hl">Nielsen Norman Group</span> — referência mundial em UX research desde 1998.
+          </p>
+          <div style="display:grid;grid-template-columns:1.1fr 1fr 1.1fr;gap:14px;align-items:stretch;">
+            <div class="card accent" style="display:flex;flex-direction:column;">
+              <div class="card-title">Quem são</div>
+              <div class="card-body">
+                Fundada por <strong style="color:var(--ink);">Jakob Nielsen</strong> (criador das 10 heurísticas, 1990) e <strong style="color:var(--ink);">Don Norman</strong> (autor de <em class="it">The Design of Everyday Things</em> e quem cunhou o termo <em class="it">user experience</em>). Publicam pesquisa, artigos e cursos sobre UX e usabilidade.
+              </div>
+            </div>
+            <div class="card" style="display:flex;flex-direction:column;">
+              <div class="card-title">Site oficial</div>
+              <div class="card-body">
+                <a href="https://www.nngroup.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:14px;">nngroup.com&nbsp;↗</a><br>
+                <span style="display:block;margin-top:8px;">Artigos, estudos, vídeos e o texto original das 10 heurísticas — todos abertos e gratuitos.</span>
+              </div>
+            </div>
+            <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:10px;">
+              <div class="card-title" style="margin:0;">Vídeo recomendado</div>
+              <a href="https://www.youtube.com/watch?v=6Bw0n6Jvwxk" target="_blank" rel="noopener" style="display:block;position:relative;aspect-ratio:16/9;background:#000;text-decoration:none;border-radius:8px;overflow:hidden;">
+                <img src="https://img.youtube.com/vi/6Bw0n6Jvwxk/maxresdefault.jpg" alt="Heuristic Evaluation of User Interfaces" style="width:100%;height:100%;object-fit:cover;display:block;opacity:.92;">
+                <span aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                  <span style="width:46px;height:46px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.45);">
+                    <span style="display:block;width:0;height:0;border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent #0a0a0a;margin-left:3px;"></span>
+                  </span>
+                </span>
+              </a>
+              <div class="card-body" style="margin:0;">
+                <a href="https://www.youtube.com/watch?v=6Bw0n6Jvwxk" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none;font-weight:600;">Heuristic Evaluation of User Interfaces&nbsp;↗</a><br>
+                <span style="display:block;margin-top:4px;">Jakob Nielsen explica, em primeira mão, o método que usamos nesta inspeção.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="corner-num">29</div>
       </div>
 
       <!-- ═══ SLIDE FINAL — WRAPPED CARD (RESUMO) ═══ -->

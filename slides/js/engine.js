@@ -458,6 +458,14 @@
     dialogOpen = false;
   }
 
+  // ─── Discoverability thumbnails — each opens its own image dialog ───
+  document.querySelectorAll('.disc-thumb').forEach(thumb => {
+    thumb.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openImageDialog([thumb], 0);
+    });
+  });
+
   // Keyboard handling for image dialog (overrides slide nav while open)
   document.addEventListener('keydown', (e) => {
     if (!dialogOpen) return;
