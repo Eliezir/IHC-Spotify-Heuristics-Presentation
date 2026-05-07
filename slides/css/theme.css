@@ -325,6 +325,25 @@ code.inline {
 .problem-meta {
   display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
 }
+/* In problem-head context, make the severity chip more prominent
+   (auto-width pill with "Sev." prefix, bigger font) */
+.problem-meta .sev {
+  width: auto;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  gap: 5px;
+}
+.problem-meta .sev::before {
+  content: 'SEV.';
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  opacity: .75;
+}
 
 .problem-grid {
   display: grid;
@@ -2906,7 +2925,7 @@ html[data-theme='light'] .credits-platform .cp-key { color: var(--ink3); }
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  overflow: hidden;
+  /* No overflow:hidden here — .pc-frame handles clipping */
   transition: transform .4s cubic-bezier(.5,0,.2,1);
 }
 .pc-slide {
@@ -3043,7 +3062,8 @@ html[data-theme='light'] .pc-caption { color: var(--ink3); }
   width: 100%;
   height: 100%;
   border-radius: 16px;
-  overflow: hidden;
+  /* No overflow:hidden here — .id-frame handles clipping. With overflow
+     here the second slide stays clipped even after the translate. */
   transition: transform .4s cubic-bezier(.5,0,.2,1);
 }
 .id-slide {
