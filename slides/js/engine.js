@@ -302,6 +302,170 @@
     });
   });
 
+  // ─── Problem Carousel — image gallery with prev/next + dots ───
+  document.querySelectorAll('.problem-carousel').forEach(carousel => {
+    const slides   = carousel.querySelectorAll('.pc-slide');
+    const dots     = carousel.querySelectorAll('.pc-dot');
+    const track    = carousel.querySelector('.pc-track');
+    const caption  = carousel.querySelector('.pc-caption');
+    const prevBtn  = carousel.querySelector('.pc-arrow.prev');
+    const nextBtn  = carousel.querySelector('.pc-arrow.next');
+    const total    = slides.length;
+
+    carousel.dataset.count = String(total);
+    carousel.dataset.currentIndex = '0';
+
+    // Set initial caption from first slide (so single-slide carousels also show it)
+    if (caption && slides[0]) {
+      caption.textContent = slides[0].dataset.caption || '';
+    }
+
+    if (total > 1) {
+      function update() {
+        const index = parseInt(carousel.dataset.currentIndex, 10) || 0;
+        if (track) track.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        if (caption) caption.textContent = slides[index].dataset.caption || '';
+        if (prevBtn) prevBtn.classList.toggle('disabled', index === 0);
+        if (nextBtn) nextBtn.classList.toggle('disabled', index === total - 1);
+      }
+      function go(i) {
+        const target = Math.max(0, Math.min(total - 1, i));
+        carousel.dataset.currentIndex = String(target);
+        update();
+      }
+      if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); go((parseInt(carousel.dataset.currentIndex,10)||0) - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); go((parseInt(carousel.dataset.currentIndex,10)||0) + 1); });
+      dots.forEach((d, i) => d.addEventListener('click', (e) => { e.stopPropagation(); go(i); }));
+      update();
+    }
+
+    // Click on the phone frame opens the image dialog
+    const frame = carousel.querySelector('.pc-frame');
+    if (frame) {
+      frame.addEventListener('click', (e) => {
+        // ignore if clicked an internal arrow
+        if (e.target.closest('.pc-arrow')) return;
+        const startIdx = parseInt(carousel.dataset.currentIndex, 10) || 0;
+        openImageDialog(slides, startIdx);
+      });
+    }
+  });
+
+  // ─── Image Dialog (modal with large carousel) ───
+  let imageDialog = null;
+  let dialogIndex = 0;
+  let dialogSlides = [];
+  let dialogOpen = false;
+
+  function ensureImageDialog() {
+    if (imageDialog) return imageDialog;
+    imageDialog = document.createElement('div');
+    imageDialog.className = 'image-dialog';
+    imageDialog.innerHTML = `
+      <button class="id-close" aria-label="Fechar">×</button>
+      <button class="id-arrow prev" aria-label="Anterior">‹</button>
+      <button class="id-arrow next" aria-label="Próxima">›</button>
+      <div class="id-content">
+        <div class="id-counter"></div>
+        <div class="id-frame"><div class="id-track"></div></div>
+        <div class="id-caption"></div>
+        <div class="id-dots"></div>
+      </div>
+    `;
+    document.body.appendChild(imageDialog);
+
+    imageDialog.querySelector('.id-close').addEventListener('click', closeImageDialog);
+    imageDialog.addEventListener('click', (e) => {
+      if (e.target === imageDialog) closeImageDialog();
+    });
+    imageDialog.querySelector('.id-arrow.prev').addEventListener('click', (e) => {
+      e.stopPropagation(); goImageDialog(dialogIndex - 1);
+    });
+    imageDialog.querySelector('.id-arrow.next').addEventListener('click', (e) => {
+      e.stopPropagation(); goImageDialog(dialogIndex + 1);
+    });
+    return imageDialog;
+  }
+
+  function openImageDialog(slides, startIndex) {
+    ensureImageDialog();
+    dialogSlides = Array.from(slides);
+    dialogIndex = Math.max(0, Math.min(dialogSlides.length - 1, startIndex || 0));
+
+    const track = imageDialog.querySelector('.id-track');
+    track.innerHTML = '';
+    dialogSlides.forEach(slide => {
+      const div = document.createElement('div');
+      div.className = 'id-slide';
+      const img = slide.querySelector('img');
+      if (img) {
+        const newImg = document.createElement('img');
+        newImg.src = img.src;
+        newImg.alt = img.alt || '';
+        div.appendChild(newImg);
+      }
+      track.appendChild(div);
+    });
+
+    // Build dots
+    const dotsContainer = imageDialog.querySelector('.id-dots');
+    dotsContainer.innerHTML = '';
+    if (dialogSlides.length > 1) {
+      dialogSlides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'id-dot';
+        dot.addEventListener('click', () => goImageDialog(i));
+        dotsContainer.appendChild(dot);
+      });
+      dotsContainer.style.display = 'flex';
+      imageDialog.querySelector('.id-arrow.prev').style.display = 'flex';
+      imageDialog.querySelector('.id-arrow.next').style.display = 'flex';
+      imageDialog.querySelector('.id-counter').style.display = 'block';
+    } else {
+      dotsContainer.style.display = 'none';
+      imageDialog.querySelector('.id-arrow.prev').style.display = 'none';
+      imageDialog.querySelector('.id-arrow.next').style.display = 'none';
+      imageDialog.querySelector('.id-counter').style.display = 'none';
+    }
+
+    goImageDialog(dialogIndex);
+    imageDialog.classList.add('open');
+    dialogOpen = true;
+  }
+
+  function goImageDialog(idx) {
+    if (idx < 0 || idx >= dialogSlides.length) return;
+    dialogIndex = idx;
+    const track = imageDialog.querySelector('.id-track');
+    track.style.transform = `translateX(${-idx * 100}%)`;
+
+    const dots = imageDialog.querySelectorAll('.id-dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+    const caption = imageDialog.querySelector('.id-caption');
+    caption.textContent = dialogSlides[idx].dataset.caption || '';
+
+    const counter = imageDialog.querySelector('.id-counter');
+    counter.textContent = `${idx + 1} / ${dialogSlides.length}`;
+
+    imageDialog.querySelector('.id-arrow.prev').classList.toggle('disabled', idx === 0);
+    imageDialog.querySelector('.id-arrow.next').classList.toggle('disabled', idx === dialogSlides.length - 1);
+  }
+
+  function closeImageDialog() {
+    if (imageDialog) imageDialog.classList.remove('open');
+    dialogOpen = false;
+  }
+
+  // Keyboard handling for image dialog (overrides slide nav while open)
+  document.addEventListener('keydown', (e) => {
+    if (!dialogOpen) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeImageDialog(); return; }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); e.stopPropagation(); goImageDialog(dialogIndex - 1); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); e.stopPropagation(); goImageDialog(dialogIndex + 1); return; }
+  }, true); /* capture phase to beat the slide-nav handler */
+
   function next() {
     if (current < total - 1) { current++; show(current); }
   }
