@@ -74,11 +74,8 @@
 
           <div class="np-content">
             <!-- Capa do "álbum" -->
-            <div class="np-cover">
-              <div class="np-cover-tag">IHC · IFAL · 26.1</div>
-              <div class="np-cover-spacer"></div>
-              <div class="np-cover-title">Inspeção<br><em>heurística.</em></div>
-              <div class="np-cover-sub">Spotify × 10 heurísticas</div>
+            <div class="np-cover" style="padding:0;background:#0a0a0a;">
+              <img src="images/hero-cover.png" alt="Inspeção Heurística no Spotify · Capa" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
             </div>
 
             <!-- Info, progresso, controles -->
@@ -347,7 +344,6 @@
       <div class="slide s-dark">
         <div class="slide-inner">
           <div class="slide-tag">Bloco 2 · As 10 heurísticas de Nielsen</div>
-          <h2 class="section">Os princípios — e quais o Spotify mais viola</h2>
           <div class="divider"></div>
 
           <div class="spotify-list">
@@ -1039,107 +1035,132 @@
         <div class="corner-num">14</div>
       </div>
 
-      <!-- ═══ SLIDE 16 — PROBLEMA 2.5 ═══ -->
+      <!-- ═══ SLIDE 15 — PROBLEMA 2.5 (Spotify-integrated layout) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f2-playlists.png') center/cover #0d6b40;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F2 · Gerenciamento de Playlists</span>
+          </div>
+
           <div class="problem-head">
             <span class="problem-id">P 2.5</span>
             <div class="problem-meta">
               <span class="pill pill-accent">H3 · H4 · H8</span>
               <span class="sev sev-3">3</span>
-              <span class="pill pill-amber">Severidade alta</span>
               <span class="pill pill-muted">Yury · Eduardo</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:30px;">Ausência de "Desfazer" ao remover músicas</h2>
+          <h2 class="section" style="font-size:26px;">
+            Ausência de "Desfazer" ao remover músicas
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <p style="font-size:13.5px;color:var(--ink2);line-height:1.55;margin-bottom:12px;max-width:880px;">
-            <strong style="color:var(--ink);">Inconsistência interna grave:</strong> dois fluxos de exclusão coexistem no mesmo app, com tratamentos opostos para erros do usuário.
-          </p>
-          <div class="ba" style="margin-top:0;">
-            <div class="ba-side bad">
-              <span class="ba-tag">Fluxo A · Menu lateral da música</span>
-              <p style="font-size:12.5px;color:var(--ink2);line-height:1.55;">
-                Toque na música → "Remover da playlist" → <strong style="color:var(--red2);">música some sem confirmação</strong>. <strong>Sem snackbar. Sem desfazer.</strong>
-              </p>
-              <div class="callout">✗ Sem rede de segurança</div>
+
+          <div class="problem-grid-spotify">
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="Notificação de remoção sem opção de desfazer (fluxo lateral)">
+                    <img src="images/hi-res/problema-2.5-desfazer.jpg" alt="Remoção de música pelo menu lateral sem opção de desfazer">
+                  </div>
+                </div>
+              </div>
+              <div class="pc-caption"></div>
             </div>
-            <div class="ba-side good">
-              <span class="ba-tag">Fluxo B · "Editar Playlist"</span>
-              <p style="font-size:12.5px;color:var(--ink2);line-height:1.55;">
-                Botão Editar → remover ⊖ → confirmar → <strong style="color:var(--accent2);">snackbar com botão "Desfazer"</strong>.
-              </p>
-              <div class="callout good">✓ Desfazer disponível</div>
+
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body"><strong>Inconsistência interna grave</strong> — dois fluxos de exclusão coexistem com tratamentos opostos pra erros do usuário.</p>
+              </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Fluxo A · Menu lateral</div>
+                  <p class="ps-body" style="font-size:11.5px;">Toque na música → "Remover" → <strong>música some sem confirmação</strong>. Sem snackbar, sem desfazer.</p>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Fluxo B · Editar Playlist</div>
+                  <p class="ps-body" style="font-size:11.5px;">Editar → remover ⊖ → confirmar → <strong>snackbar com "Desfazer"</strong>. Rede de segurança OK.</p>
+                </div>
+              </div>
+
+              <div class="ps-section">
+                <div class="ps-label">Solução proposta</div>
+                <p class="ps-body" style="font-size:12px;">Padronizar <strong style="color:var(--accent2);">snackbar com "Desfazer"</strong> em todos os fluxos. A inconsistência sozinha viola H4 — somada à H8 (prevenção) e H3 (controle), justifica severidade 3.</p>
+              </div>
             </div>
           </div>
-          <div class="solution-box" style="margin-top:14px;">
-            <div class="solution-icon">✓</div>
-            <div>
-              <span class="solution-label">Solução</span>
-              <span class="solution-text">Padronizar <strong>snackbar com "Desfazer"</strong> em todos os fluxos de exclusão. A inconsistência sozinha já viola H4 — somada à ausência de prevenção (H8) e perda de controle (H3), justifica severidade 3.</span>
+        </div>
+        <div class="corner-num">15</div>
+      </div>
+
+      <!-- ═══ SLIDE 16 — PROBLEMAS 2.6 e 2.7 (Ações finas) ═══ -->
+      <div class="slide s-dark">
+        <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f2-playlists.png') center/cover #0d6b40;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F2 · Gerenciamento de Playlists</span>
+          </div>
+
+          <div class="slide-tag">F2 · Ações finas · 2 problemas</div>
+          <h2 class="section" style="font-size:28px;">Atritos na manipulação direta</h2>
+          <div class="divider"></div>
+
+          <div class="disc-grid">
+            <div class="card disc-card" style="border-left:3px solid #ff8c00;">
+              <div class="disc-thumb" data-caption="P 2.6 · Tela 'Edit playlist' com handles de reordenação ativos" tabindex="0" role="button" aria-label="Abrir foto P 2.6">
+                <img src="images/hi-res/problema-2.6-reordenacao.jpg" alt="Tela de edição da playlist com handles de reordenação">
+              </div>
+              <div class="disc-content">
+                <div class="disc-head">
+                  <span class="disc-title" style="color:#ffb86c;">P 2.6 · Reordenação acidental</span>
+                  <span class="sev sev-2">2</span>
+                </div>
+                <div class="disc-body">Durante scroll rápido o usuário pode <strong style="color:var(--ink);">arrastar uma faixa sem querer</strong>. Sem confirmação visual nem desfazer imediato.</div>
+                <div class="disc-solution">→ Highlight + toast com opção de <strong>desfazer</strong></div>
+              </div>
+            </div>
+
+            <div class="card disc-card" style="border-left:3px solid var(--amber);">
+              <div class="disc-thumb" data-caption="P 2.7 · Ícones de remoção (⊖) e reordenação (☰) na tela de edição" tabindex="0" role="button" aria-label="Abrir foto P 2.7">
+                <img src="images/hi-res/problema-2.7-2.8-edicao.jpg" alt="Ícones ⊖ e ☰ na tela de edição da playlist">
+              </div>
+              <div class="disc-content">
+                <div class="disc-head">
+                  <span class="disc-title" style="color:var(--amber2);">P 2.7 · Ícones pouco intuitivos</span>
+                  <span class="sev sev-1">1</span>
+                </div>
+                <div class="disc-body">
+                  <span style="font-size:18px;color:var(--red2);vertical-align:middle;">⊖</span>
+                  <span style="font-size:10px;color:var(--ink3);margin-right:8px;">remover?</span>
+                  <span style="font-size:18px;color:var(--ink3);vertical-align:middle;">☰</span>
+                  <span style="font-size:10px;color:var(--ink3);">reordenar?</span>
+                  — <strong style="color:var(--ink);">não são autoexplicativos</strong>.
+                </div>
+                <div class="disc-solution">→ <strong>X / lixeira</strong> (remover) e <strong>↑↓</strong> (reordenar)</div>
+              </div>
             </div>
           </div>
         </div>
         <div class="corner-num">16</div>
       </div>
 
-      <!-- ═══ SLIDE 17 — PROBLEMAS 2.6 e 2.7 ═══ -->
+      <!-- ═══ SLIDE 17 — PROBLEMA 2.8 (carousel à direita) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
-          <div class="slide-tag">F2 · Ações finas · 2 problemas</div>
-          <h2 class="section" style="font-size:30px;">Atritos na manipulação direta</h2>
-          <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;">
-            <div class="card" style="border-left:3px solid #ff8c00;">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
-                <div>
-                  <span class="card-title" style="color:#ffb86c;">P 2.6 · Reordenação acidental no scroll</span>
-                </div>
-                <span class="sev sev-2">2</span>
-              </div>
-              <div class="card-body">Ao reorganizar manualmente, durante scroll rápido o usuário pode <strong style="color:var(--ink);">arrastar uma faixa sem querer</strong>. Não há confirmação visual nem rota de desfazer imediato.</div>
-              <div class="solution-box" style="margin-top:6px;padding:10px 12px;">
-                <div class="solution-icon" style="width:22px;height:22px;font-size:12px;">✓</div>
-                <div>
-                  <span class="solution-label">Solução</span>
-                  <span class="solution-text" style="font-size:12px;">Confirmação visual temporária (highlight + toast) com opção de desfazer.</span>
-                </div>
-              </div>
-            </div>
-            <div class="card" style="border-left:3px solid var(--amber);">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
-                <div>
-                  <span class="card-title" style="color:var(--amber2);">P 2.7 · Ícones pouco intuitivos</span>
-                </div>
-                <span class="sev sev-1">1</span>
-              </div>
-              <div class="card-body" style="display:flex;gap:14px;align-items:center;">
-                <div>
-                  <span style="font-size:24px;color:var(--red2);">⊖</span>
-                  <span style="font-size:11px;color:var(--ink3);margin-left:4px;">remover?</span>
-                </div>
-                <div>
-                  <span style="font-size:24px;color:var(--ink3);">☰</span>
-                  <span style="font-size:11px;color:var(--ink3);margin-left:4px;">reordenar?</span>
-                </div>
-              </div>
-              <div class="card-body">Ícones <code class="inline">⊖</code> (círculo com traço) e <code class="inline">☰</code> (três linhas) <strong style="color:var(--ink);">não são autoexplicativos</strong> — exigem aprendizado.</div>
-              <div class="solution-box" style="margin-top:6px;padding:10px 12px;">
-                <div class="solution-icon" style="width:22px;height:22px;font-size:12px;">✓</div>
-                <div>
-                  <span class="solution-label">Solução</span>
-                  <span class="solution-text" style="font-size:12px;">Substituir por <strong>X / lixeira</strong> (remover) e <strong>setas ↑↓</strong> (reordenar).</span>
-                </div>
-              </div>
-            </div>
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f2-playlists.png') center/cover #0d6b40;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F2 · Gerenciamento de Playlists</span>
           </div>
-        </div>
-        <div class="corner-num">17</div>
-      </div>
 
-      <!-- ═══ SLIDE 18 — PROBLEMA 2.8 ═══ -->
-      <div class="slide s-dark">
-        <div class="slide-inner">
           <div class="problem-head">
             <span class="problem-id">P 2.8</span>
             <div class="problem-meta">
@@ -1148,33 +1169,62 @@
               <span class="pill pill-muted">Thomas</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:30px;">Ausência de seleção múltipla</h2>
+          <h2 class="section" style="font-size:26px;">
+            Ausência de seleção múltipla
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;">
-            <div>
-              <p style="font-size:14px;color:var(--ink2);line-height:1.6;margin-bottom:14px;">
-                Não é possível selecionar <strong style="color:var(--ink);">múltiplas músicas</strong> para remover ou mover em lote. Em playlists longas (50+ faixas), organizar exige <em class="it">repetir o mesmo gesto dezenas de vezes</em>.
-              </p>
-              <div class="callout">⚠ Eficiência (H6) violada para usuários avançados</div>
-              <p style="font-size:13px;color:var(--ink3);line-height:1.55;margin-top:12px;">
-                Padrão presente em virtualmente <strong style="color:var(--ink);">todos os apps de música/biblioteca</strong> — Apple Music, YouTube Music, biblioteca de fotos, e-mail.
-              </p>
-            </div>
-            <div class="solution-box">
-              <div class="solution-icon">✓</div>
-              <div>
-                <span class="solution-label">Solução</span>
-                <span class="solution-text">Modo de <strong>seleção múltipla via toque longo</strong>. Após o primeiro toque longo, demais toques alternam seleção. Barra inferior com ações em lote (mover, remover, adicionar a outra playlist).</span>
+
+          <div class="problem-grid-spotify" style="grid-template-columns:1fr 168px;">
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body">Não é possível selecionar <strong>múltiplas músicas</strong> para remover ou mover em lote. Em playlists longas (50+ faixas), organizar exige <em class="it">repetir o mesmo gesto dezenas de vezes</em>.</p>
               </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Eficiência prejudicada</div>
+                  <ul class="ps-points">
+                    <li><strong>H6 violada</strong> — fluxo cansativo pra usuários avançados.</li>
+                    <li>Padrão presente em <strong>Apple Music, YouTube Music</strong> e bibliotecas em geral.</li>
+                    <li>Gestos individuais repetidos dezenas de vezes em playlists longas.</li>
+                  </ul>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Solução proposta</div>
+                  <p class="ps-body">Modo de <strong style="color:var(--accent2);">seleção múltipla via toque longo</strong>. Após o primeiro toque, demais alternam seleção. Barra inferior com ações em lote (mover, remover, adicionar).</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="P 2.8 · Tela de edição com gestos individuais por faixa">
+                    <img src="images/hi-res/problema-2.7-2.8-edicao.jpg" alt="Tela de edição da playlist sem opção de seleção múltipla">
+                  </div>
+                </div>
+              </div>
+              <div class="pc-caption"></div>
             </div>
           </div>
         </div>
-        <div class="corner-num">18</div>
+        <div class="corner-num">17</div>
       </div>
 
-      <!-- ═══ SLIDE 19 — PROBLEMA 2.9 ═══ -->
+      <!-- ═══ SLIDE 18 — PROBLEMA 2.9 (carousel à esquerda) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f2-playlists.png') center/cover #0d6b40;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F2 · Gerenciamento de Playlists</span>
+          </div>
+
           <div class="problem-head">
             <span class="problem-id">P 2.9</span>
             <div class="problem-meta">
@@ -1184,44 +1234,62 @@
               <span class="pill pill-muted">Thomas</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:30px;">Playlist criada como pública por padrão</h2>
+          <h2 class="section" style="font-size:26px;">
+            Playlist criada como pública por padrão
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;">
-            <div class="phone" style="height:300px;">
-              <div class="phone-bar" style="background:var(--bg6);">Nova Playlist</div>
-              <div class="phone-row" style="background:var(--bg5);padding:6px;border-radius:4px;">
-                <div class="phone-thumb"></div>
-                <div class="phone-meta"><span class="phone-title">Minha playlist #84</span></div>
+
+          <div class="problem-grid-spotify">
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="Tela de criação de playlist sem opção de privacidade">
+                    <img src="images/hi-res/problema-2.9-privacidade.jpg" alt="Tela de criação de playlist no Spotify sem opção pública/privada">
+                  </div>
+                </div>
               </div>
-              <div style="font-size:8px;color:var(--ink3);padding:4px 0;">3 músicas</div>
-              <div class="phone-row" style="margin-top:14px;background:rgba(29,185,84,.15);padding:6px;border-radius:4px;justify-content:center;">
-                <span style="font-size:9px;color:var(--accent2);font-weight:700;">Criar</span>
-              </div>
-              <div class="callout" style="font-size:8.5px;margin-top:8px;text-align:center;">⚠ Sem opção pública/privada nesta tela</div>
+              <div class="pc-caption"></div>
             </div>
-            <div>
-              <p style="font-size:14px;color:var(--ink2);line-height:1.6;margin-bottom:12px;">
-                Toda playlist é criada como <strong style="color:var(--red2);">pública</strong>, sem que o usuário possa definir privacidade no momento da criação. Para tornar privada, é preciso <em class="it">depois</em> abrir o menu da playlist e alternar.
-              </p>
-              <p style="font-size:13px;color:var(--ink3);line-height:1.55;margin-bottom:12px;">
-                Embora envolva <span class="hl-amber">privacidade do usuário</span>, a equipe considerou severidade <strong style="color:var(--amber2);">2</strong> — o usuário pode alterar a privacidade depois nas configurações da playlist, mas a ausência da opção no fluxo de criação ainda pode levar a exposições não intencionais.
-              </p>
-              <div class="solution-box">
-                <div class="solution-icon">✓</div>
-                <div>
-                  <span class="solution-label">Solução</span>
-                  <span class="solution-text">Toggle <strong>"Pública / Privada"</strong> visível na tela de criação · padrão privado para reduzir vazamento acidental.</span>
+
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body">Toda playlist é criada como <strong>pública</strong>, sem que o usuário possa definir privacidade no momento da criação. Para tornar privada, é preciso <em class="it">depois</em> abrir o menu da playlist e alternar.</p>
+              </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Risco de exposição</div>
+                  <ul class="ps-points">
+                    <li><strong>H1 violada</strong> — estado de privacidade não comunicado.</li>
+                    <li><strong>H8 violada</strong> — sem prevenção de vazamento acidental.</li>
+                    <li>Embora ajustável depois, o <em class="it">default público</em> pode expor playlists íntimas no perfil.</li>
+                  </ul>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Solução proposta</div>
+                  <p class="ps-body">Toggle <strong style="color:var(--accent2);">"Pública / Privada"</strong> visível na tela de criação · padrão <strong>privado</strong> para reduzir vazamento acidental.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="corner-num">19</div>
+        <div class="corner-num">18</div>
       </div>
 
-      <!-- ═══ SLIDE 20 — PROBLEMA 2.10 ═══ -->
+      <!-- ═══ SLIDE 19 — PROBLEMA 2.10 (carousel à direita) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f2-playlists.png') center/cover #0d6b40;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F2 · Gerenciamento de Playlists</span>
+          </div>
+
           <div class="problem-head">
             <span class="problem-id">P 2.10</span>
             <div class="problem-meta">
@@ -1230,62 +1298,135 @@
               <span class="pill pill-muted">Eduardo</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:30px;">Descrição e "Adicionar músicas" mal posicionados</h2>
+          <h2 class="section" style="font-size:26px;">
+            Descrição e "Adicionar músicas" mal posicionados
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px;">
-            <div class="card" style="border-left:3px solid var(--red);">
-              <span class="card-title" style="color:var(--red2);">Onde está hoje</span>
-              <ul class="bullet-list" style="font-size:12.5px;">
-                <li><div><strong style="color:var(--ink);">Adicionar descrição</strong> está oculto dentro do menu horizontal (3 pontos).</div></li>
-                <li><div><strong style="color:var(--ink);">Adicionar músicas</strong> fica no rodapé da playlist — divergindo do padrão da busca global, que está no topo.</div></li>
-              </ul>
+
+          <div class="problem-grid-spotify" style="grid-template-columns:1fr 168px;">
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body">Funções essenciais da playlist ficam <strong>fora do fluxo natural</strong>: a descrição se esconde no menu de três pontos e <em class="it">"Adicionar músicas"</em> aparece só no rodapé — fora do padrão da busca global, que está no topo.</p>
+              </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Onde está hoje</div>
+                  <ul class="ps-points">
+                    <li><strong>Adicionar descrição</strong> oculto dentro do menu horizontal (3 pontos).</li>
+                    <li><strong>Adicionar músicas</strong> no rodapé — diverge do padrão da busca global no topo.</li>
+                    <li><strong>H1 · H4</strong> · funcionalidade central invisível e inconsistente com o próprio app.</li>
+                  </ul>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Solução proposta</div>
+                  <p class="ps-body">Campo de <strong style="color:var(--accent2);">descrição direto na criação/edição</strong> · padronizar posição da busca <strong>sempre no topo</strong> da playlist.</p>
+                </div>
+              </div>
             </div>
-            <div class="card accent">
-              <span class="card-title">O custo</span>
-              <ul class="bullet-list" style="font-size:12.5px;">
-                <li><div><strong style="color:var(--ink);">H1</strong> · funcionalidade central invisível à primeira vista.</div></li>
-                <li><div><strong style="color:var(--ink);">H4</strong> · inconsistência com outros padrões do próprio app.</div></li>
-                <li><div>Usuário precisa <em class="it">aprender</em> caminhos não óbvios para tarefas básicas.</div></li>
-              </ul>
+
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="Campo de descrição acessível apenas por menu modal">
+                    <img src="images/hi-res/problema-2.10-descricao.jpg" alt="Tela da playlist no Spotify com descrição e adicionar músicas mal posicionados">
+                  </div>
+                </div>
+              </div>
+              <div class="pc-caption"></div>
             </div>
           </div>
-          <div class="solution-box" style="margin-top:14px;">
-            <div class="solution-icon">✓</div>
-            <div>
-              <span class="solution-label">Solução</span>
-              <span class="solution-text">Incluir <strong>campo de descrição direto na criação/edição</strong> da playlist · padronizar posicionamento de campos de busca <strong>sempre no topo</strong>.</span>
+        </div>
+        <div class="corner-num">19</div>
+      </div>
+
+      <!-- ═══ SLIDE 20 — F3 · MIXAGEM (Album cover) ═══ -->
+      <div class="slide playlist-slide">
+        <div class="slide-inner">
+          <div class="pl-header">
+            <div class="pl-cover has-image">
+              <img src="images/f3-mixagem.png" alt="F3 · Mixagem · Edit Transition + Blend — Inspeção Heurística no Spotify">
+            </div>
+            <div class="pl-info">
+              <div class="pl-type">Album · Funcionalidade 3</div>
+              <div class="pl-title" style="font-size:42px;">F3 · Mixagem · Edit Transition + Blend</div>
+              <div class="pl-desc">Recursos avançados restritos a Premium que <strong>expõem termos técnicos</strong> de DJ (BPM, notação Camelot, formas de onda) sem mediação. <strong>P 3.1</strong> (onboarding ausente) e <strong>P 3.4</strong> (etapas do Blend) puxam a fila. Heurísticas dominantes: H1, H6, H10.</div>
+              <div class="pl-meta">
+                <strong>Spotify Mobile · iOS</strong>
+                <span class="pl-dot"></span>
+                <span><strong>4</strong> faixas</span>
+                <span class="pl-dot"></span>
+                <span>~3 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pl-actions">
+            <span class="pl-play-big" aria-label="Tocar"></span>
+            <span class="pl-icon" aria-label="Curtir">♡</span>
+            <span class="pl-icon" aria-label="Compartilhar">↗</span>
+            <span class="pl-icon" aria-label="Mais">⋯</span>
+          </div>
+
+          <div class="pl-tracklist">
+            <div class="pl-track-header">
+              <span class="pl-h-num">#</span>
+              <span class="pl-h-title">Título</span>
+              <span class="pl-h-dur">⏱</span>
+            </div>
+            <div class="pl-tracks">
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">1</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 3.1 · Ausência de onboarding em recursos avançados</div>
+                  <div class="pl-track-subtitle">H1 · H2 · H5 · H6 · H10 · severidade 3 · 3 avaliadores</div>
+                </div>
+                <span class="pl-track-duration">0:50</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">2</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 3.2 · Limite oculto de intervalo editável na transição</div>
+                  <div class="pl-track-subtitle">H1 · H3 · severidade 2</div>
+                </div>
+                <span class="pl-track-duration">0:35</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">3</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 3.3 · Recurso Premium sem mensagem clara para usuários free</div>
+                  <div class="pl-track-subtitle">H1 · H10 · severidade 1</div>
+                </div>
+                <span class="pl-track-duration">0:30</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">4</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 3.4 · Processo de Blend exige muitas etapas</div>
+                  <div class="pl-track-subtitle">H6 · severidade 3</div>
+                </div>
+                <span class="pl-track-duration">0:45</span>
+              </div>
             </div>
           </div>
         </div>
         <div class="corner-num">20</div>
       </div>
 
-      <!-- ═══ SLIDE 21 — F3 OVERVIEW ═══ -->
-      <div class="slide s-mid">
-        <div class="slide-inner">
-          <div class="section-header">
-            <div class="section-num">F3</div>
-            <div class="section-info">
-              <div class="section-label">Funcionalidade 3 · 4 problemas</div>
-              <div class="section-title">Mixagem · Edit Transition + Blend</div>
-            </div>
-          </div>
-          <p style="font-size:14px;color:var(--ink2);line-height:1.6;max-width:820px;margin-bottom:14px;">
-            Recursos avançados do Spotify — restritos a Premium — que <strong style="color:var(--ink);">expõem termos técnicos</strong> de DJ (BPM, notação Camelot, formas de onda) sem mediação para o usuário comum.
-          </p>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div class="p-row"><span class="p-id">3.1</span><div class="p-text">Ausência de onboarding em recursos avançados de mixagem<span class="p-h">H1·H2·H5·H6·H10</span></div><div class="p-meta"><span class="pill pill-accent">3 avaliadores</span><span class="sev sev-3">3</span></div></div>
-            <div class="p-row"><span class="p-id">3.2</span><div class="p-text">Limite oculto de intervalo editável na transição<span class="p-h">H1·H3</span></div><div class="p-meta"><span class="sev sev-2">2</span></div></div>
-            <div class="p-row"><span class="p-id">3.3</span><div class="p-text">Recurso Premium sem mensagem clara para usuários free<span class="p-h">H1·H10</span></div><div class="p-meta"><span class="sev sev-1">1</span></div></div>
-            <div class="p-row"><span class="p-id">3.4</span><div class="p-text">Processo de Blend exige muitas etapas<span class="p-h">H6</span></div><div class="p-meta"><span class="sev sev-3">3</span></div></div>
-          </div>
-        </div>
-        <div class="corner-num">21</div>
-      </div>
-
-      <!-- ═══ SLIDE 22 — PROBLEMA 3.1 ═══ -->
+      <!-- ═══ SLIDE 21 — PROBLEMA 3.1 (carousel à esquerda) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f3-mixagem.png') center/cover #6e3a8d;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F3 · Mixagem</span>
+          </div>
+
           <div class="problem-head">
             <span class="problem-id">P 3.1</span>
             <div class="problem-meta">
@@ -1295,52 +1436,62 @@
               <span class="pill pill-muted">Eliezir · Thomas · Yury</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:28px;">Ausência de onboarding em mixagem</h2>
+          <h2 class="section" style="font-size:26px;">
+            Ausência de onboarding em mixagem
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;">
-            <div class="card" style="border-left:3px solid var(--red);">
-              <span class="card-title" style="color:var(--red2);">Edit Transition</span>
-              <p style="font-size:12.5px;color:var(--ink2);line-height:1.5;">
-                Termos especializados despejados sem explicação:
-              </p>
-              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;">
-                <span class="pill pill-muted" style="font-family:'JetBrains Mono',monospace;">BPM</span>
-                <span class="pill pill-muted" style="font-family:'JetBrains Mono',monospace;">11B / 12B</span>
-                <span class="pill pill-muted" style="font-family:'JetBrains Mono',monospace;">crossfade</span>
-                <span class="pill pill-muted" style="font-family:'JetBrains Mono',monospace;">fade in/out</span>
-                <span class="pill pill-muted" style="font-family:'JetBrains Mono',monospace;">crossover</span>
-                <span class="pill pill-muted" style="font-family:'JetBrains Mono',monospace;">forma de onda</span>
+
+          <div class="problem-grid-spotify" style="grid-template-columns:168px 1fr;">
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="Tela &quot;Edit transition&quot; com termos técnicos (BPM, 11B, 2 bars)">
+                    <img src="images/hi-res/problema-3.1-edit-transition.jpg" alt="Tela Edit Transition do Spotify com termos técnicos de DJ">
+                  </div>
+                </div>
               </div>
-              <p style="font-size:11.5px;color:var(--ink3);line-height:1.5;margin-top:8px;">
-                Notação <strong style="color:var(--ink);">Camelot</strong> exige conhecimento de teoria musical e prática de DJ.
-              </p>
+              <div class="pc-caption"></div>
             </div>
-            <div class="card" style="border-left:3px solid var(--red);">
-              <span class="card-title" style="color:var(--red2);">Blend</span>
-              <p style="font-size:12.5px;color:var(--ink2);line-height:1.5;">
-                Sistema não explica <strong style="color:var(--ink);">como</strong> a mixagem é construída antes de criar a playlist combinada.
-              </p>
-              <ul class="bullet-list" style="font-size:11.5px;margin-top:6px;">
-                <li><div>Que critérios são usados?</div></li>
-                <li><div>Qual a diferença entre Blend, playlist colaborativa e compartilhada?</div></li>
-                <li><div>O resultado é uma surpresa — boa ou ruim.</div></li>
-              </ul>
-            </div>
-          </div>
-          <div class="solution-box" style="margin-top:12px;">
-            <div class="solution-icon">✓</div>
-            <div>
-              <span class="solution-label">Solução</span>
-              <span class="solution-text"><strong>Onboarding obrigatório no primeiro acesso</strong> a cada recurso · <strong>tooltips contextuais</strong> nos termos técnicos · explicação resumida antes da criação do Blend.</span>
+
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body">Recursos avançados de DJ chegam ao usuário <strong>sem mediação</strong>: <em class="it">Edit Transition</em> exibe BPM, notação Camelot e formas de onda, e o <em class="it">Blend</em> cria a playlist sem explicar critérios. O resultado vira uma surpresa — boa ou ruim.</p>
+              </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Onde está hoje</div>
+                  <ul class="ps-points">
+                    <li><strong>Edit Transition</strong> · termos como <span style="font-family:'JetBrains Mono',monospace;">BPM, 11B, crossfade</span> sem tooltip.</li>
+                    <li><strong>Blend</strong> · sistema não explica <em class="it">como</em> a mixagem é construída antes de criar.</li>
+                    <li><strong>5 heurísticas</strong> violadas — recordista do estudo.</li>
+                  </ul>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Solução proposta</div>
+                  <p class="ps-body"><strong style="color:var(--accent2);">Onboarding obrigatório</strong> no primeiro acesso · <strong>tooltips contextuais</strong> nos termos técnicos · explicação resumida antes da criação do Blend.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="corner-num">22</div>
+        <div class="corner-num">21</div>
       </div>
 
-      <!-- ═══ SLIDE 23 — PROBLEMA 3.2 ═══ -->
+      <!-- ═══ SLIDE 22 — PROBLEMA 3.2 (carousel à direita) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f3-mixagem.png') center/cover #6e3a8d;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F3 · Mixagem</span>
+          </div>
+
           <div class="problem-head">
             <span class="problem-id">P 3.2</span>
             <div class="problem-meta">
@@ -1349,33 +1500,62 @@
               <span class="pill pill-muted">Thomas</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:30px;">Limite oculto de intervalo editável na transição</h2>
+          <h2 class="section" style="font-size:26px;">
+            Limite oculto de intervalo editável na transição
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:center;">
-            <div>
-              <p style="font-size:14px;color:var(--ink2);line-height:1.6;margin-bottom:12px;">
-                O editor de transição possui um <strong style="color:var(--ink);">limite máximo de intervalo</strong> editável — mas não exibe a duração em segundos, nem indica qual é o limite, nem explica <em class="it">o motivo</em> do limite.
-              </p>
-              <div class="callout">⚠ O usuário só descobre que existe limite quando <em>esbarra</em> nele.</div>
-              <p style="font-size:13px;color:var(--ink3);line-height:1.55;margin-top:12px;">
-                Sem feedback (H1) e sem rota clara para entender/contornar (H3), o usuário fica preso num estado opaco.
-              </p>
-            </div>
-            <div class="solution-box">
-              <div class="solution-icon">✓</div>
-              <div>
-                <span class="solution-label">Solução</span>
-                <span class="solution-text">Exibir <strong>duração em segundos</strong> em tempo real · ao atingir o limite, <strong>mensagem explicativa</strong> ("intervalo máximo de Xs para preservar o batimento da faixa").</span>
+
+          <div class="problem-grid-spotify" style="grid-template-columns:1fr 168px;">
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body">O editor de transição tem um <strong>limite máximo de intervalo</strong>, mas não exibe a duração em segundos, não indica qual é o limite, nem explica o <em class="it">motivo</em>. O usuário só descobre o limite quando esbarra nele.</p>
               </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Onde está hoje</div>
+                  <ul class="ps-points">
+                    <li>Sem <strong>feedback de duração</strong> (H1) durante a edição.</li>
+                    <li>Sem <strong>rota clara</strong> (H3) para entender/contornar o limite.</li>
+                    <li>Estado opaco — interação trava sem explicação.</li>
+                  </ul>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Solução proposta</div>
+                  <p class="ps-body">Exibir <strong style="color:var(--accent2);">duração em segundos</strong> em tempo real · ao atingir o limite, <strong>mensagem explicativa</strong> ("intervalo máximo de Xs para preservar o batimento").</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="Editor de transição com limite editável sem duração visível">
+                    <img src="images/hi-res/problema-3.2-limite.jpg" alt="Editor de transição do Spotify com limite oculto de intervalo">
+                  </div>
+                </div>
+              </div>
+              <div class="pc-caption"></div>
             </div>
           </div>
         </div>
-        <div class="corner-num">23</div>
+        <div class="corner-num">22</div>
       </div>
 
-      <!-- ═══ SLIDE 24 — PROBLEMA 3.3 ═══ -->
+      <!-- ═══ SLIDE 23 — PROBLEMA 3.3 (carousel à esquerda) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f3-mixagem.png') center/cover #6e3a8d;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F3 · Mixagem</span>
+          </div>
+
           <div class="problem-head">
             <span class="problem-id">P 3.3</span>
             <div class="problem-meta">
@@ -1384,37 +1564,62 @@
               <span class="pill pill-muted">Eduardo</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:30px;">Recurso Premium sem mensagem clara para free</h2>
+          <h2 class="section" style="font-size:26px;">
+            Recurso Premium sem mensagem clara para free
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-            <div class="card" style="border-left:3px solid var(--red);">
-              <span class="card-title" style="color:var(--red2);">Comportamento atual</span>
-              <p style="font-size:13px;color:var(--ink2);line-height:1.55;">
-                Usuário free toca em "Edit Transition" → o sistema <strong style="color:var(--red2);">não responde</strong> ou abre uma tela vaga, <em class="it">sem indicar</em> que é restrição de plano.
-              </p>
-              <div class="callout" style="margin-top:8px;">✗ Falha silenciosa — usuário acha que é bug.</div>
+
+          <div class="problem-grid-spotify" style="grid-template-columns:168px 1fr;">
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="Tela da playlist sem indicação visual de restrições Premium">
+                    <img src="images/hi-res/problema-3.3-premium.jpg" alt="Playlist do Spotify sem indicação visual de restrições Premium">
+                  </div>
+                </div>
+              </div>
+              <div class="pc-caption"></div>
             </div>
-            <div class="card accent">
-              <span class="card-title">Por que sev. 1</span>
-              <p style="font-size:12.5px;color:var(--ink2);line-height:1.55;">
-                Embora a falta de mensagem prejudique a comunicação, o usuário rapidamente percebe que se trata de feature Premium pelo contexto, e o impacto cognitivo é baixo.
-              </p>
-            </div>
-          </div>
-          <div class="solution-box" style="margin-top:14px;">
-            <div class="solution-icon">✓</div>
-            <div>
-              <span class="solution-label">Solução</span>
-              <span class="solution-text"><strong>Ícone de cadeado</strong> + tag "Premium" no botão · ao tocar, <strong>mensagem explicativa</strong> ("Edit Transition é exclusivo do Premium — saiba mais") com CTA opcional para upgrade.</span>
+
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body">Usuário <em class="it">free</em> toca em "Edit Transition" e o sistema <strong>não responde</strong> ou abre uma tela vaga, sem indicar que é restrição de plano. Falha silenciosa que parece um bug.</p>
+              </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Onde está hoje</div>
+                  <ul class="ps-points">
+                    <li>Botão sem <strong>indicador visual</strong> de feature Premium.</li>
+                    <li>Toque não devolve <strong>mensagem explicativa</strong>.</li>
+                    <li>Usuário interpreta como bug — <strong>H1 · H10</strong> violadas.</li>
+                  </ul>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Solução proposta</div>
+                  <p class="ps-body"><strong style="color:var(--accent2);">Ícone de cadeado</strong> + tag "Premium" no botão · ao tocar, <strong>mensagem explicativa</strong> com CTA opcional para upgrade.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="corner-num">24</div>
+        <div class="corner-num">23</div>
       </div>
 
-      <!-- ═══ SLIDE 25 — PROBLEMA 3.4 ═══ -->
+      <!-- ═══ SLIDE 24 — PROBLEMA 3.4 (carousel à direita) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
+          <div class="problem-context">
+            <div class="pc-mini-cover" style="background:url('images/f3-mixagem.png') center/cover #6e3a8d;"></div>
+            <span class="pc-pulse"></span>
+            <span>Playing from Album · F3 · Mixagem</span>
+          </div>
+
           <div class="problem-head">
             <span class="problem-id">P 3.4</span>
             <div class="problem-meta">
@@ -1423,30 +1628,54 @@
               <span class="pill pill-muted">Yury</span>
             </div>
           </div>
-          <h2 class="section" style="font-size:30px;">Processo de Blend com muitas etapas</h2>
+          <h2 class="section" style="font-size:26px;">
+            Processo de Blend com muitas etapas
+            <span class="problem-actions">
+              <span class="pa-heart" aria-label="Curtir">♡</span>
+              <span class="pa-share" aria-label="Compartilhar">↗</span>
+            </span>
+          </h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:18px;">
-            <div>
-              <p style="font-size:14px;color:var(--ink2);line-height:1.6;margin-bottom:12px;">
-                Convidar uma pessoa e gerar a playlist Blend exige <strong style="color:var(--ink);">múltiplos passos</strong>: abrir biblioteca → "+" → escolher Blend → selecionar pessoa → enviar convite → aguardar aceitação → abrir notificação → começa a montagem.
-              </p>
-              <p style="font-size:13.5px;color:var(--ink3);line-height:1.55;">
-                <span class="hl">H6 violada:</span> uma <em class="it">funcionalidade social</em> precisa ser leve. Cada etapa extra é um ponto onde o convite pode morrer.
-              </p>
-            </div>
-            <div class="solution-box">
-              <div class="solution-icon">✓</div>
-              <div>
-                <span class="solution-label">Solução</span>
-                <span class="solution-text">Reduzir para <strong>2 passos:</strong> escolher pessoa → compartilhar link/convite. Permitir convite direto via <strong>deep link</strong> (WhatsApp, mensagem, etc) sem que o convidado precise iniciar o fluxo no app.</span>
+
+          <div class="problem-grid-spotify" style="grid-template-columns:1fr 168px;">
+            <div class="problem-content">
+              <div class="ps-section">
+                <div class="ps-label">Sobre o problema</div>
+                <p class="ps-body">Convidar uma pessoa e gerar a playlist Blend exige <strong>múltiplos passos</strong>: biblioteca → "+" → Blend → escolher pessoa → enviar convite → aguardar aceitação → abrir notificação → começa a montagem. Uma feature <em class="it">social</em> precisa ser leve.</p>
               </div>
+
+              <div class="ps-cards">
+                <div class="ps-card bad">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Onde está hoje</div>
+                  <ul class="ps-points">
+                    <li><strong>~7 etapas</strong> entre intenção e playlist gerada.</li>
+                    <li>Cada etapa extra é um ponto onde o <strong>convite pode morrer</strong>.</li>
+                    <li><strong>H6 violada</strong> · convidado precisa iniciar fluxo no próprio app.</li>
+                  </ul>
+                </div>
+                <div class="ps-card good">
+                  <div class="ps-card-label"><span class="ps-card-dot"></span> Solução proposta</div>
+                  <p class="ps-body">Reduzir para <strong style="color:var(--accent2);">2 passos:</strong> escolher pessoa → compartilhar link. Convite direto via <strong>deep link</strong> (WhatsApp, mensagem) sem fricção.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="problem-carousel">
+              <div class="pc-frame">
+                <div class="pc-track">
+                  <div class="pc-slide" data-caption="Tela &quot;Create a Blend&quot; — primeira de várias etapas">
+                    <img src="images/hi-res/problema-3.4-blend.jpg" alt="Tela Create a Blend do Spotify — primeira de várias etapas">
+                  </div>
+                </div>
+              </div>
+              <div class="pc-caption"></div>
             </div>
           </div>
         </div>
-        <div class="corner-num">25</div>
+        <div class="corner-num">24</div>
       </div>
 
-      <!-- ═══ SLIDE 26 — HEURÍSTICAS MAIS VIOLADAS ═══ -->
+      <!-- ═══ SLIDE 25 — HEURÍSTICAS MAIS VIOLADAS ═══ -->
       <div class="slide s-dark2">
         <div class="slide-inner">
           <div class="slide-tag">Análise consolidada · Heurísticas</div>
@@ -1508,10 +1737,10 @@
             <strong style="color:var(--accent2);">Padrão:</strong> H1 lidera, com H4, H5 e H6 empatadas em segundo — falhas de <span class="hl">descoberta</span>, <span class="hl">consistência</span> e <span class="hl">eficiência</span>. H9 zerada — Spotify acerta na recuperação de erros.
           </p>
         </div>
-        <div class="corner-num">26</div>
+        <div class="corner-num">25</div>
       </div>
 
-      <!-- ═══ SLIDE 27 — DISTRIBUIÇÃO POR SEVERIDADE ═══ -->
+      <!-- ═══ SLIDE 26 — DISTRIBUIÇÃO POR SEVERIDADE ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
           <div class="slide-tag">Análise consolidada · Severidade</div>
@@ -1558,10 +1787,10 @@
             </div>
           </div>
         </div>
-        <div class="corner-num">27</div>
+        <div class="corner-num">26</div>
       </div>
 
-      <!-- ═══ SLIDE 28 — PADRÕES E TRADE-OFFS ═══ -->
+      <!-- ═══ SLIDE 27 — PADRÕES E TRADE-OFFS ═══ -->
       <div class="slide s-dark2">
         <div class="slide-inner">
           <div class="slide-tag">Conclusões · Padrões observados</div>
@@ -1591,10 +1820,10 @@
             </div>
           </div>
         </div>
-        <div class="corner-num">28</div>
+        <div class="corner-num">27</div>
       </div>
 
-      <!-- ═══ SLIDE 29 — QUER IR MAIS FUNDO? (RECURSOS · NN/g) ═══ -->
+      <!-- ═══ SLIDE 28 — QUER IR MAIS FUNDO? (RECURSOS · NN/g) ═══ -->
       <div class="slide s-dark">
         <div class="slide-inner">
           <div class="slide-tag">Recursos · Para saber mais</div>
@@ -1634,60 +1863,89 @@
             </div>
           </div>
         </div>
-        <div class="corner-num">29</div>
+        <div class="corner-num">28</div>
       </div>
 
-      <!-- ═══ SLIDE FINAL — WRAPPED CARD (RESUMO) ═══ -->
-      <div class="slide wrapped wrapped-bg-pink">
-        <div class="wrapped-blob" style="width:480px;height:480px;background:#1ed760;top:-160px;right:-140px;opacity:.5;"></div>
-        <div class="wrapped-blob" style="width:380px;height:380px;background:#ff5c00;bottom:-140px;left:-120px;opacity:.5;"></div>
-        <div class="slide-inner" style="padding:50px 56px 38px;">
-          <div class="wrapped-eyebrow">A sua inspeção em 1 cartão</div>
-          <h2 class="wrapped-headline" style="font-size:48px;margin-bottom:18px;">
-            Obrigado<span style="opacity:.6;">.</span>
-          </h2>
-          <div class="wrapped-grid">
-            <div class="wrapped-card">
-              <span class="wc-label">Total de problemas</span>
-              <span class="wc-value counter" data-count-to="18" data-count-dur="800">0</span>
-              <span class="wc-sub">únicos · após mesclagem</span>
-            </div>
-            <div class="wrapped-card">
-              <span class="wc-label">Severidade média</span>
-              <span class="wc-value counter" data-count-to="1.9" data-count-dur="800">0</span>
-              <span class="wc-sub">na escala de 1 a 4</span>
-            </div>
-            <div class="wrapped-card span2">
-              <span class="wc-label">Top 3 heurísticas violadas</span>
-              <div class="wrapped-chips" style="margin-top:6px;">
-                <span class="wrapped-chip lg">H1 · Visibilidade · 8</span>
-                <span class="wrapped-chip lg">H4 · H5 · H6 · 6 cada</span>
-                <span class="wrapped-chip lg">H7 · Estética · 5</span>
+      <!-- ═══ SLIDE 29 — WRAPPED 2026.1 · OBRIGADO (dark sunburst) ═══ -->
+      <div class="slide wrapped" style="background:radial-gradient(ellipse at 70% 35%, #2a0a4a 0%, #0a0a0f 70%);color:#fff;">
+        <!-- Sun-ray burst behind the cover -->
+        <div aria-hidden="true" style="position:absolute;top:-10%;right:-20%;width:120%;height:120%;background:repeating-conic-gradient(from 0deg at 70% 35%, rgba(255,140,0,.22) 0deg 6deg, transparent 6deg 18deg);filter:blur(.4px);pointer-events:none;z-index:0;mask-image:radial-gradient(circle at 70% 35%, #000 0%, #000 32%, transparent 60%);-webkit-mask-image:radial-gradient(circle at 70% 35%, #000 0%, #000 32%, transparent 60%);"></div>
+        <!-- Yellow halo glow -->
+        <div aria-hidden="true" style="position:absolute;top:18%;right:14%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle, rgba(255,200,40,.45) 0%, rgba(255,140,0,.15) 45%, transparent 70%);filter:blur(8px);pointer-events:none;z-index:1;"></div>
+
+        <div class="slide-inner" style="padding:42px 56px 96px;position:relative;z-index:2;">
+          <div class="wrapped-eyebrow" style="color:#ffce3a;">IHC · IFAL · Wrapped 2026.1</div>
+
+          <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start;">
+            <!-- Coluna esquerda: títulos + listas -->
+            <div>
+              <h2 class="wrapped-headline italic-accent" style="font-size:78px;margin-bottom:6px;color:#fff;">
+                Obrigado<span style="color:#1ed760;">.</span>
+              </h2>
+              <p class="wrapped-sub" style="margin-bottom:20px;color:rgba(255,255,255,.78);font-size:17px;max-width:520px;">
+                18 problemas. 9 heurísticas tocadas. 4 avaliadores. <em style="font-style:italic;font-weight:600;color:#ffce3a;">Web design is my passion.</em>
+              </p>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:18px;">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#ffce3a;margin-bottom:8px;">Top Heurísticas</div>
+                  <ol style="list-style:none;padding:0;margin:0;font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.65;font-weight:600;">
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">1</span> H1 · Visibilidade · <span style="opacity:.6;">8</span></li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">2</span> H4 · Consistência · <span style="opacity:.6;">6</span></li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">3</span> H5 · Reconhecer · <span style="opacity:.6;">6</span></li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">4</span> H6 · Eficiência · <span style="opacity:.6;">6</span></li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">5</span> H7 · Estética · <span style="opacity:.6;">5</span></li>
+                  </ol>
+                </div>
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#ffce3a;margin-bottom:8px;">Top Problemas · sev 3</div>
+                  <ol style="list-style:none;padding:0;margin:0;font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.65;font-weight:600;">
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">1</span> P 1.2 · Diferenciação</li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">2</span> P 2.5 · Desfazer</li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">3</span> P 3.1 · Onboarding</li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">4</span> P 3.4 · Etapas Blend</li>
+                    <li><span style="color:#ffce3a;font-family:'JetBrains Mono',monospace;display:inline-block;width:18px;">5</span> P 2.2 · Menu sobrec.</li>
+                  </ol>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px;">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:2px;">Problemas únicos</div>
+                  <div style="font-family:'Inter',sans-serif;font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:#fff;">
+                    <span class="counter" data-count-to="18" data-count-dur="800">0</span>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:2px;">Top genre</div>
+                  <div style="font-family:'Inter',sans-serif;font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em;color:#1ed760;">IHC</div>
+                </div>
               </div>
             </div>
-            <div class="wrapped-card">
-              <span class="wc-label">Sev. 3 — problemas maiores</span>
-              <span class="wc-value">5</span>
-              <span class="wc-sub">P 1.2 · 2.2 · 2.5 · 3.1 · 3.4</span>
-            </div>
-            <div class="wrapped-card">
-              <span class="wc-label">Maior consenso</span>
-              <span class="wc-value">P 1.2</span>
-              <span class="wc-sub">4 avaliadores em concordância</span>
+
+            <!-- Coluna direita: capa "álbum" com halo -->
+            <div style="position:relative;align-self:start;margin-top:8px;">
+              <div style="position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#0a0a0f;box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 0 6px rgba(255,206,58,.18);">
+                <img src="images/final-image.png" alt="Capa Wrapped 2026.1 — Inspeção heurística do Spotify" style="width:100%;height:100%;object-fit:cover;display:block;">
+              </div>
+              <div style="position:absolute;top:-12px;left:-12px;background:#1ed760;color:#0a0a0a;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:7px 12px;border-radius:999px;transform:rotate(-4deg);box-shadow:0 6px 18px rgba(0,0,0,.45);">
+                ★ Now Playing
+              </div>
             </div>
           </div>
         </div>
-        <div class="wrapped-meta">
+
+        <div class="wrapped-meta" style="color:rgba(255,255,255,.7);z-index:3;">
           <div class="meta-group">
-            <span class="meta-key">Apresentado por</span>
-            <span class="meta-val">Eliezir · Yury · Eduardo · Thomas</span>
+            <span class="meta-key" style="color:#ffce3a;">Apresentado por</span>
+            <span class="meta-val" style="color:#fff;">Eliezir · Yury · Eduardo · Thomas</span>
           </div>
           <div class="meta-group" style="text-align:right;">
-            <span class="meta-key">Aberto a perguntas</span>
-            <span class="meta-val">→</span>
+            <span class="meta-key" style="color:#ffce3a;">Aberto a perguntas</span>
+            <span class="meta-val" style="color:#fff;">→</span>
           </div>
         </div>
-        <div class="corner-num">29</div>
+        <div class="corner-num" style="color:#fff;opacity:.08;">29</div>
       </div>
 
     </div>

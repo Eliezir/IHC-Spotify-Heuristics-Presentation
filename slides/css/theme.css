@@ -3328,6 +3328,15 @@ html[data-theme='light'] .ps-card:hover { background: var(--bg3); }
   color: var(--ink2);
   line-height: 1.45;
 }
+/* Inline solution hint (used on cards that have their own fix per problem) */
+.disc-solution {
+  font-size: 11px;
+  color: var(--accent2);
+  font-weight: 600;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.disc-solution strong { color: #fff; }
 
 /* ════════════════════════════════════════════════════════════════════
    PROBLEM SLIDE — Spotify integration: top "playing from" label,
