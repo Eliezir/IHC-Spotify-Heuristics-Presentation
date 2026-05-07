@@ -2101,3 +2101,215 @@ html[data-theme='light'] .slide.wrapped-intro .corner-num         { color: #fff;
 html[data-theme='light'] .mini-stat-card {
   box-shadow: 0 12px 28px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.18);
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   EQUALIZER / SOUND VISUALIZER — Spotify-style spectrum analyzer
+   4 columns (severities), each with multiple thin bars that dance
+   continuously with random-ish timings to feel like live audio.
+   ════════════════════════════════════════════════════════════════════ */
+.eq-chart {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  align-items: end;
+  height: 220px;
+  margin: 28px 0 24px;
+  padding: 0 30px;
+}
+.eq-col {
+  display: flex;
+  gap: 5px;
+  align-items: end;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+.eq-num {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 800;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,.6);
+  white-space: nowrap;
+}
+
+.eq-bar {
+  width: 11px;
+  border-radius: 3px 3px 1px 1px;
+  position: relative;
+  transform-origin: bottom center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+.eq-bar::after {
+  /* tiny highlight on top of bar */
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: rgba(255,255,255,.5);
+  border-radius: inherit;
+}
+
+/* Per-column color + base height */
+.eq-col.s1 .eq-bar { background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%); }
+.eq-col.s2 .eq-bar { background: linear-gradient(180deg, #fde047 0%, #eab308 100%); }
+.eq-col.s3 .eq-bar { background: linear-gradient(180deg, #fb923c 0%, #ea580c 100%); }
+.eq-col.s4 .eq-bar { background: linear-gradient(180deg, #f87171 0%, #b91c1c 100%); }
+
+/* Heights — slight variation within a column for spectrum-analyzer feel */
+.eq-col.s1 .eq-bar { height: 26%; }
+.eq-col.s1 .eq-bar:nth-child(2) { height: 22%; }
+.eq-col.s1 .eq-bar:nth-child(3) { height: 30%; }
+.eq-col.s1 .eq-bar:nth-child(4) { height: 24%; }
+.eq-col.s1 .eq-bar:nth-child(5) { height: 28%; }
+
+.eq-col.s2 .eq-bar { height: 52%; }
+.eq-col.s2 .eq-bar:nth-child(2) { height: 56%; }
+.eq-col.s2 .eq-bar:nth-child(3) { height: 48%; }
+.eq-col.s2 .eq-bar:nth-child(4) { height: 60%; }
+.eq-col.s2 .eq-bar:nth-child(5) { height: 50%; }
+
+.eq-col.s3 .eq-bar { height: 76%; }
+.eq-col.s3 .eq-bar:nth-child(2) { height: 80%; }
+.eq-col.s3 .eq-bar:nth-child(3) { height: 72%; }
+.eq-col.s3 .eq-bar:nth-child(4) { height: 84%; }
+.eq-col.s3 .eq-bar:nth-child(5) { height: 78%; }
+
+.eq-col.s4 .eq-bar { height: 96%; }
+.eq-col.s4 .eq-bar:nth-child(2) { height: 100%; }
+.eq-col.s4 .eq-bar:nth-child(3) { height: 92%; }
+.eq-col.s4 .eq-bar:nth-child(4) { height: 100%; }
+.eq-col.s4 .eq-bar:nth-child(5) { height: 94%; }
+
+/* Dance-and-settle — bars oscillate briefly on slide entry then lock
+   to their severity-defined height (scaleY(1) = full CSS height). */
+.slide.active .eq-bar {
+  transform: scaleY(0);
+  animation: viz-dance-a var(--dur, 1.7s) cubic-bezier(.32,.04,.22,1) var(--delay, 0s) forwards;
+}
+
+/* Three dance patterns for visual variance — distributed by nth-child */
+.eq-col .eq-bar:nth-child(3n+2) { animation-name: viz-dance-b; }
+.eq-col .eq-bar:nth-child(3n)   { animation-name: viz-dance-c; }
+
+/* All bars start at the same time (delay 0) — natural variance comes
+   from different durations + different dance keyframes per nth-child.
+   This makes the first ~1.8s feel like real audio playing. */
+.eq-col.s1 .eq-bar:nth-child(1) { --dur: 1.65s; }
+.eq-col.s1 .eq-bar:nth-child(2) { --dur: 1.85s; }
+.eq-col.s1 .eq-bar:nth-child(3) { --dur: 1.55s; }
+.eq-col.s1 .eq-bar:nth-child(4) { --dur: 1.95s; }
+.eq-col.s1 .eq-bar:nth-child(5) { --dur: 1.70s; }
+
+.eq-col.s2 .eq-bar:nth-child(1) { --dur: 1.75s; }
+.eq-col.s2 .eq-bar:nth-child(2) { --dur: 1.55s; }
+.eq-col.s2 .eq-bar:nth-child(3) { --dur: 1.90s; }
+.eq-col.s2 .eq-bar:nth-child(4) { --dur: 1.60s; }
+.eq-col.s2 .eq-bar:nth-child(5) { --dur: 1.80s; }
+
+.eq-col.s3 .eq-bar:nth-child(1) { --dur: 1.85s; }
+.eq-col.s3 .eq-bar:nth-child(2) { --dur: 1.65s; }
+.eq-col.s3 .eq-bar:nth-child(3) { --dur: 1.95s; }
+.eq-col.s3 .eq-bar:nth-child(4) { --dur: 1.75s; }
+.eq-col.s3 .eq-bar:nth-child(5) { --dur: 1.50s; }
+
+.eq-col.s4 .eq-bar:nth-child(1) { --dur: 1.55s; }
+.eq-col.s4 .eq-bar:nth-child(2) { --dur: 1.90s; }
+.eq-col.s4 .eq-bar:nth-child(3) { --dur: 1.70s; }
+.eq-col.s4 .eq-bar:nth-child(4) { --dur: 1.85s; }
+.eq-col.s4 .eq-bar:nth-child(5) { --dur: 1.65s; }
+
+/* Three dance patterns — all settle at scaleY(1) */
+@keyframes viz-dance-a {
+  0%   { transform: scaleY(0.05); }
+  18%  { transform: scaleY(0.75); }
+  32%  { transform: scaleY(0.40); }
+  48%  { transform: scaleY(0.95); }
+  62%  { transform: scaleY(0.55); }
+  76%  { transform: scaleY(0.90); }
+  88%  { transform: scaleY(0.95); }
+  100% { transform: scaleY(1); }
+}
+@keyframes viz-dance-b {
+  0%   { transform: scaleY(0.10); }
+  15%  { transform: scaleY(0.55); }
+  30%  { transform: scaleY(0.90); }
+  45%  { transform: scaleY(0.45); }
+  60%  { transform: scaleY(0.85); }
+  74%  { transform: scaleY(0.70); }
+  88%  { transform: scaleY(0.95); }
+  100% { transform: scaleY(1); }
+}
+@keyframes viz-dance-c {
+  0%   { transform: scaleY(0.15); }
+  20%  { transform: scaleY(0.70); }
+  36%  { transform: scaleY(0.50); }
+  54%  { transform: scaleY(1); }
+  68%  { transform: scaleY(0.75); }
+  82%  { transform: scaleY(0.92); }
+  100% { transform: scaleY(1); }
+}
+
+.eq-labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  padding: 0 40px;
+}
+.eq-label {
+  text-align: center;
+  display: flex; flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.eq-label .lbl-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px; font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -.015em;
+}
+.eq-label.s1 .lbl-title { color: #4ade80; }
+.eq-label.s2 .lbl-title { color: #fde047; }
+.eq-label.s3 .lbl-title { color: #fb923c; }
+.eq-label.s4 .lbl-title { color: #f87171; }
+.eq-label .lbl-sub {
+  font-size: 11.5px;
+  color: var(--ink3);
+  line-height: 1.4;
+  max-width: 170px;
+}
+
+/* Numbers and labels fade in (bars dance continuously, defined above) */
+.slide.active .eq-num,
+.slide.active .eq-label {
+  animation: eq-fade .5s ease-out backwards;
+}
+.slide.active .eq-col:nth-child(1) .eq-num { animation-delay: .15s; }
+.slide.active .eq-col:nth-child(2) .eq-num { animation-delay: .22s; }
+.slide.active .eq-col:nth-child(3) .eq-num { animation-delay: .29s; }
+.slide.active .eq-col:nth-child(4) .eq-num { animation-delay: .36s; }
+.slide.active .eq-labels .eq-label:nth-child(1) { animation-delay: .25s; }
+.slide.active .eq-labels .eq-label:nth-child(2) { animation-delay: .35s; }
+.slide.active .eq-labels .eq-label:nth-child(3) { animation-delay: .45s; }
+.slide.active .eq-labels .eq-label:nth-child(4) { animation-delay: .55s; }
+
+@keyframes eq-fade {
+  from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+/* Override translateX for labels (which don't need it) */
+.slide.active .eq-label {
+  animation-name: eq-fade-simple;
+}
+@keyframes eq-fade-simple {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+html[data-theme='light'] .eq-num { color: var(--ink3); }
+html[data-theme='light'] .eq-label .lbl-sub { color: var(--ink3); }
+html[data-theme='light'] .eq-label.s1 .lbl-title { color: #16a34a; }
+html[data-theme='light'] .eq-label.s2 .lbl-title { color: #b45309; }
+html[data-theme='light'] .eq-label.s3 .lbl-title { color: #c2410c; }
+html[data-theme='light'] .eq-label.s4 .lbl-title { color: #b91c1c; }
