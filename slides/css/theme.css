@@ -982,3 +982,288 @@ html[data-theme='light'] .theme-toggle {
 .wrapped.wrapped-bg-lime ~ * {} /* placeholder for selector specificity */
 
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   NOW PLAYING SLIDE — Spotify app mock
+   ════════════════════════════════════════════════════════════════════ */
+.nowplay {
+  background: linear-gradient(180deg, #1f5c44 0%, #0c2c20 38%, #050d09 78%, #000 100%);
+  color: #fff;
+}
+.nowplay .slide-inner {
+  padding: 24px 56px 26px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── Top bar (down chevron / context / menu) ─── */
+.np-topbar {
+  display: grid;
+  grid-template-columns: 24px 1fr 24px;
+  align-items: center;
+  margin-bottom: 18px;
+  margin-top: 6px;
+}
+.np-chev, .np-menu {
+  font-size: 22px;
+  color: rgba(255,255,255,.85);
+  font-weight: 300;
+  line-height: 1;
+}
+.np-chev { transform: rotate(0); }
+.np-context {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.np-context-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+}
+.np-context-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px; font-weight: 700;
+  color: #fff; letter-spacing: -.005em;
+}
+
+/* ─── Main content split: cover ↔ info+controls ─── */
+.np-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+  align-items: center;
+  flex: 1;
+  padding: 4px 0 0;
+}
+
+/* ─── Album cover ─── */
+.np-cover {
+  width: 320px; height: 320px;
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse 80% 60% at 28% 22%, rgba(255,255,255,.18), transparent 55%),
+    linear-gradient(135deg, #1ed760 0%, #0d6b40 48%, #052218 100%);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.55),
+    0 6px 18px rgba(29,185,84,.18),
+    inset 0 0 0 1px rgba(255,255,255,.08);
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  padding: 26px 22px 22px;
+  flex-shrink: 0;
+}
+.np-cover::after {
+  /* subtle vignette to ground the cover */
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 95%, rgba(0,0,0,.45), transparent 55%);
+  pointer-events: none;
+}
+.np-cover-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 800;
+  letter-spacing: .18em;
+  color: rgba(0,0,0,.65);
+  align-self: flex-start;
+  position: relative; z-index: 2;
+}
+.np-cover-spacer { flex: 1; }
+.np-cover-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 56px; font-weight: 800;
+  line-height: .9; letter-spacing: -.04em;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0,0,0,.32);
+  position: relative; z-index: 2;
+}
+.np-cover-title em {
+  font-style: italic; font-weight: 800;
+  color: #d6ffe5;
+}
+.np-cover-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.85);
+  margin-top: 10px;
+  position: relative; z-index: 2;
+}
+
+/* ─── Right column: info + controls ─── */
+.np-info {
+  display: flex; flex-direction: column; gap: 16px;
+  min-width: 0;
+}
+.np-track-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 18px;
+}
+.np-track-meta { min-width: 0; flex: 1; }
+.np-track-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px; font-weight: 800;
+  line-height: 1.04; letter-spacing: -.022em;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.np-track-artist {
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.np-actions {
+  display: flex; gap: 14px; flex-shrink: 0;
+  padding-top: 6px;
+}
+.np-actions span {
+  font-size: 22px;
+  color: rgba(255,255,255,.7);
+  cursor: pointer;
+  line-height: 1;
+}
+.np-heart.liked { color: var(--accent); }
+
+/* ─── Progress bar ─── */
+.np-progress { display: flex; flex-direction: column; gap: 6px; }
+.np-progress-track {
+  position: relative;
+  height: 4px;
+  background: rgba(255,255,255,.22);
+  border-radius: 2px;
+}
+.np-progress-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: #fff;
+  border-radius: 2px;
+  width: 6%;
+  transition: width 1s ease-out;
+}
+.np-progress-thumb {
+  position: absolute;
+  top: 50%; transform: translate(-50%, -50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  left: 6%;
+  transition: left 1s ease-out;
+}
+.np-progress-time {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; font-weight: 600;
+  color: rgba(255,255,255,.65);
+}
+
+/* ─── Controls ─── */
+.np-controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: 26px;
+  margin-top: 4px;
+}
+.np-ctrl {
+  font-size: 19px;
+  color: rgba(255,255,255,.78);
+  cursor: pointer;
+  line-height: 1;
+  transition: color .15s;
+}
+.np-ctrl:hover { color: #fff; }
+.np-ctrl.np-shuffle { color: var(--accent2); }
+.np-play {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1;
+  box-shadow: 0 4px 14px rgba(0,0,0,.35);
+  transition: transform .2s, box-shadow .2s;
+  cursor: pointer;
+}
+.np-play:hover { transform: scale(1.06); }
+.np-play::before { content: '▶'; transform: translateX(1px); }
+
+/* ─── Bottom secondary actions row (lyrics / queue / device) ─── */
+.np-secondary {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+}
+.np-device {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent2); font-weight: 700;
+}
+.np-device::before {
+  content: '●'; color: var(--accent);
+  font-size: 8px;
+  animation: np-blink 1.6s ease-in-out infinite;
+}
+@keyframes np-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .35; }
+}
+
+/* ─── Active animations ─── */
+.nowplay.active .np-cover {
+  animation: np-cover-in .9s cubic-bezier(.18,.9,.32,1.18) backwards;
+  animation-delay: .1s;
+}
+.nowplay.active .np-topbar {
+  animation: np-info-up .55s ease-out backwards;
+  animation-delay: .05s;
+}
+.nowplay.active .np-track-row,
+.nowplay.active .np-progress,
+.nowplay.active .np-controls,
+.nowplay.active .np-secondary {
+  animation: np-info-up .55s ease-out backwards;
+}
+.nowplay.active .np-track-row { animation-delay: .25s; }
+.nowplay.active .np-progress  { animation-delay: .35s; }
+.nowplay.active .np-controls  { animation-delay: .45s; }
+.nowplay.active .np-secondary { animation-delay: .55s; }
+.nowplay.active .np-play {
+  animation: np-info-up .55s ease-out backwards .45s, np-play-pulse 2.6s ease-in-out 1.6s infinite;
+}
+
+@keyframes np-cover-in {
+  from { opacity: 0; transform: translateY(20px) scale(.93); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes np-info-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes np-play-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,.35), 0 0 0 0 rgba(255,255,255,0); }
+  50%      { box-shadow: 0 4px 14px rgba(0,0,0,.35), 0 0 22px 6px rgba(255,255,255,.18); }
+}
+
+/* Subtle vinyl-spin animation hint on cover (very slow) */
+.nowplay.active .np-cover::before {
+  content: '';
+  position: absolute;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  bottom: 16px; right: 16px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.22), transparent 60%);
+  animation: np-pulse 3.6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes np-pulse {
+  0%,100% { transform: scale(1); opacity: .55; }
+  50%     { transform: scale(1.18); opacity: .82; }
+}
+
