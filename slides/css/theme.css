@@ -2498,7 +2498,7 @@ html[data-theme='light'] .spotify-list::-webkit-scrollbar-thumb { background: rg
 html[data-theme='light'] .spotify-list::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.32); }
 .sl-row {
   display: grid;
-  grid-template-columns: 36px 1fr auto 22px;
+  grid-template-columns: 36px 1fr;
   gap: 14px;
   align-items: center;
   padding: 4px 10px;
