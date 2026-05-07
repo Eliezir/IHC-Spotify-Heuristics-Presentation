@@ -135,9 +135,12 @@
   }
 
   // ─── Now Playing cinematic play sequence ───
-  const NP_FROM_SEC = 8;     // current track time (0:08)
-  const NP_TO_SEC   = 1200;  // total track length (20:00)
-  const NP_DURATION = 2000;  // animation duration in ms (matches CSS slider transition)
+  const NP_FROM_SEC    = 8;     // current track time (0:08)
+  const NP_TO_SEC      = 1200;  // total track length (20:00)
+  const NP_SLIDER_MS   = 2500;  // slider fill duration (matches CSS transition)
+  const NP_CURSOR_DELAY  = 250; // ms to wait before cursor starts moving
+  const NP_CURSOR_TRAVEL = 1000; // ms cursor takes to reach heart
+  const NP_TOTAL_MS    = 3500;  // total time before auto-advance
 
   function fmtTime(sec) {
     sec = Math.max(0, Math.round(sec));
@@ -146,10 +149,38 @@
     return `${m}:${String(s).padStart(2,'0')}`;
   }
 
+  // Position in slide-internal coords (0..960, 0..540) accounting for the scaler
+  function slideCoords(slide, target) {
+    const sr = slide.getBoundingClientRect();
+    const tr = target.getBoundingClientRect();
+    const scaleX = sr.width / 960;
+    const scaleY = sr.height / 540;
+    return {
+      x: (tr.left + tr.width / 2 - sr.left) / scaleX,
+      y: (tr.top + tr.height / 2 - sr.top) / scaleY,
+    };
+  }
+
+  function ensureCursor(slide) {
+    let cur = slide.querySelector('.np-cursor');
+    if (cur) return cur;
+    cur = document.createElement('div');
+    cur.className = 'np-cursor';
+    cur.innerHTML = `<svg viewBox="0 0 28 28" width="24" height="24"><path d="M2 2 L2 21 L7 17 L10 25 L13 24 L10 16 L17 16 Z" fill="#fff" stroke="#0a0a0a" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+    slide.appendChild(cur);
+    return cur;
+  }
+
   function resetNowPlaying(slide) {
     slide.classList.remove('playing');
     const heart = slide.querySelector('.np-heart');
     if (heart) heart.classList.remove('liked');
+    const cur = slide.querySelector('.np-cursor');
+    if (cur) {
+      cur.style.transition = 'none';
+      cur.style.opacity = '0';
+      cur.classList.remove('clicking');
+    }
     const times = slide.querySelectorAll('.np-progress-time span');
     if (times.length >= 2) {
       times[0].textContent = fmtTime(NP_FROM_SEC);
@@ -159,28 +190,64 @@
 
   function startNowPlayingShow(slide) {
     if (slide.classList.contains('playing')) return;
-    // 1. Heart fills with bounce
-    const heart = slide.querySelector('.np-heart');
-    if (heart) heart.classList.add('liked');
-    // 2 + 3. Slide-level .playing → swaps icon to ⏸, fills slider via CSS
+
+    // 1. Slide-level .playing → swaps icon to ⏸, fills slider via CSS
     slide.classList.add('playing');
-    // 4. Animate the time counters
+
+    // 2. Animate time counters in sync with slider
     const times = slide.querySelectorAll('.np-progress-time span');
     if (times.length >= 2) {
       const start = performance.now();
-      function tick(now) {
-        const t = Math.min(1, (now - start) / NP_DURATION);
+      (function tick(now) {
+        const t = Math.min(1, ((now || performance.now()) - start) / NP_SLIDER_MS);
         const cur = NP_FROM_SEC + (NP_TO_SEC - NP_FROM_SEC) * t;
         times[0].textContent = fmtTime(cur);
         times[1].textContent = '-' + fmtTime(NP_TO_SEC - cur);
         if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
+      })();
     }
-    // 5. Auto-advance after the slider reaches the end
-    setTimeout(() => {
-      next();
-    }, NP_DURATION + 200);
+
+    // 3. Cursor appears at play button, moves to heart, clicks
+    const playBtn = slide.querySelector('.np-play');
+    const heart   = slide.querySelector('.np-heart');
+    if (playBtn && heart) {
+      const cur = ensureCursor(slide);
+      const startPos = slideCoords(slide, playBtn);
+      const endPos   = slideCoords(slide, heart);
+
+      // Reset cursor at play button
+      cur.style.transition = 'none';
+      cur.style.left = startPos.x + 'px';
+      cur.style.top  = startPos.y + 'px';
+      cur.style.opacity = '0';
+
+      requestAnimationFrame(() => {
+        cur.style.transition = 'opacity .25s ease';
+        cur.style.opacity = '1';
+
+        setTimeout(() => {
+          cur.style.transition = `left ${NP_CURSOR_TRAVEL}ms cubic-bezier(.5,0,.15,1), top ${NP_CURSOR_TRAVEL}ms cubic-bezier(.5,0,.15,1)`;
+          cur.style.left = endPos.x + 'px';
+          cur.style.top  = endPos.y + 'px';
+
+          // On arrival: click ripple + heart fills
+          setTimeout(() => {
+            cur.classList.add('clicking');
+            heart.classList.add('liked');
+            setTimeout(() => cur.classList.remove('clicking'), 600);
+
+            // Cursor fades out a bit later
+            setTimeout(() => {
+              cur.style.transition = 'opacity .4s ease';
+              cur.style.opacity = '0';
+            }, 700);
+          }, NP_CURSOR_TRAVEL);
+        }, NP_CURSOR_DELAY);
+      });
+    }
+
+    // 4. Auto-advance after the full sequence
+    setTimeout(() => next(), NP_TOTAL_MS);
   }
 
   // Wire up the play button on the Now Playing slide
