@@ -6,6 +6,62 @@
   let current = parseInt(localStorage.getItem(STORAGE_KEY), 10) || 0;
   if (isNaN(current) || current >= total || current < 0) current = 0;
 
+  // ─── Auto-render corner-num based on slide order ───
+  slides.forEach((slide, i) => {
+    const cn = slide.querySelector('.corner-num');
+    if (cn) cn.textContent = String(i + 1).padStart(2, '0');
+  });
+
+  // ─── Inject story-bar segments (Instagram/Wrapped style) ───
+  slides.forEach((slide) => {
+    if (slide.querySelector('.story-bar')) return;
+    const bar = document.createElement('div');
+    bar.className = 'story-bar';
+    for (let i = 0; i < total; i++) {
+      const seg = document.createElement('div');
+      seg.className = 'story-seg';
+      bar.appendChild(seg);
+    }
+    slide.insertBefore(bar, slide.firstChild);
+  });
+
+  function updateStoryBars(idx) {
+    slides.forEach((slide) => {
+      const segs = slide.querySelectorAll('.story-seg');
+      segs.forEach((s, i) => {
+        s.classList.remove('done', 'curr');
+        if (i < idx) s.classList.add('done');
+        else if (i === idx) s.classList.add('curr');
+      });
+    });
+  }
+
+  // ─── Animated counters (data-count-to) ───
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.countTo);
+    if (!Number.isFinite(target)) return;
+    const dur = parseInt(el.dataset.countDur, 10) || 900;
+    const decimals = (el.dataset.countTo.split('.')[1] || '').length;
+    const start = performance.now();
+    function frame(now) {
+      const t = Math.min(1, (now - start) / dur);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      const value = target * eased;
+      el.textContent = decimals
+        ? value.toFixed(decimals).replace('.', ',')
+        : Math.round(value).toString();
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = decimals
+        ? target.toFixed(decimals).replace('.', ',')
+        : String(target);
+    }
+    requestAnimationFrame(frame);
+  }
+  function runCounters(slide) {
+    slide.querySelectorAll('[data-count-to]').forEach(animateCounter);
+  }
+
   const tocToggle = document.getElementById('toc-toggle');
   const tocPanel  = document.getElementById('toc-panel');
   const tocItems  = document.querySelectorAll('.toc-item[data-goto]');
@@ -61,6 +117,7 @@
     counter.textContent = `${idx + 1} / ${total}`;
     localStorage.setItem(STORAGE_KEY, idx);
     updateTocActive(idx);
+    updateStoryBars(idx);
     currentStep = 0;
     if (slideStepTotal(slides[idx])) applyStep(slides[idx], 0);
     // Animate bar fills on entry
@@ -71,6 +128,8 @@
         b.style.width = b.dataset.w;
       }));
     });
+    // Animate counters
+    runCounters(slides[idx]);
   }
 
   function next() {
