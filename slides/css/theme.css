@@ -2006,3 +2006,98 @@ html[data-theme='light'] .slide.wrapped-intro .corner-num         { color: #fff;
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   MINI-STAT CARDS — Wrapped-style stat tiles on dark slides
+   3 vibrant gradient cards (pink / cyan / lime). Used on content slides
+   where we want individual stats to "pop" without going full Wrapped.
+   ════════════════════════════════════════════════════════════════════ */
+.mini-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+.mini-stat-card {
+  border-radius: 14px;
+  padding: 22px 22px 20px;
+  display: flex; flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.12);
+}
+.mini-stat-card::before {
+  /* radial highlight for a subtle "album art" feel */
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 22% 12%, rgba(255,255,255,.22), transparent 55%);
+  pointer-events: none;
+}
+
+.mini-stat-card.pink {
+  background: linear-gradient(140deg, #ff5cce 0%, #ff1b8d 55%, #b40060 100%);
+  color: #fff;
+}
+.mini-stat-card.cyan {
+  background: linear-gradient(140deg, #6effff 0%, #00d4ff 50%, #006fb6 100%);
+  color: #03132c;
+}
+.mini-stat-card.lime {
+  background: linear-gradient(140deg, #d4ff44 0%, #1ed760 55%, #07523c 100%);
+  color: #061a0d;
+}
+
+.mini-stat-card .ms-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .82;
+  position: relative;
+  z-index: 2;
+}
+.mini-stat-card .ms-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 64px; font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.045em;
+  margin-top: 14px;
+  margin-bottom: auto;
+  position: relative;
+  z-index: 2;
+}
+.mini-stat-card .ms-num .ms-unit {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-left: 1px;
+  opacity: .9;
+}
+.mini-stat-card .ms-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600;
+  line-height: 1.4;
+  margin-top: 14px;
+  position: relative;
+  z-index: 2;
+  opacity: .92;
+}
+
+/* Reveal animations — cards rise/scale in cascading */
+.slide.active .mini-stat-card {
+  animation: ms-rise .55s cubic-bezier(.18,.9,.32,1.18) backwards;
+}
+.slide.active .mini-stat-card:nth-child(1) { animation-delay: .12s; }
+.slide.active .mini-stat-card:nth-child(2) { animation-delay: .22s; }
+.slide.active .mini-stat-card:nth-child(3) { animation-delay: .32s; }
+
+@keyframes ms-rise {
+  from { opacity: 0; transform: translateY(18px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Light theme: cards keep their vibrant color but tone down shadow */
+html[data-theme='light'] .mini-stat-card {
+  box-shadow: 0 12px 28px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.18);
+}
