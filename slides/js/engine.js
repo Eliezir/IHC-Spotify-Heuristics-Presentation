@@ -91,6 +91,18 @@
         ? `<kbd>.</kbd> próximo · <kbd>,</kbd> voltar · <span style="opacity:.55">${step}/${t}</span>`
         : `<kbd>.</kbd> destacar · <kbd>,</kbd> voltar`;
     }
+    // If a step element is inside a scrollable container, keep it in view.
+    const activeStep = slide.querySelector('.step.active');
+    if (activeStep) {
+      const scroller = activeStep.closest('.pl-tracks');
+      if (scroller) {
+        const tr = activeStep.getBoundingClientRect();
+        const sr = scroller.getBoundingClientRect();
+        if (tr.top < sr.top || tr.bottom > sr.bottom) {
+          activeStep.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
   }
   function nextStep() {
     const slide = slides[current];
@@ -132,6 +144,8 @@
     runCounters(slides[idx]);
     // Reset Now Playing state when navigating back to it
     if (slides[idx].classList.contains('nowplay')) resetNowPlaying(slides[idx]);
+    // Reset Playlist slide state when navigating back to it
+    if (slides[idx].classList.contains('playlist-slide')) resetPlaylistSlide(slides[idx]);
   }
 
   // ─── Now Playing cinematic play sequence ───
@@ -271,6 +285,20 @@
       e.stopPropagation();
       const slide = btn.closest('.nowplay');
       if (slide) startNowPlayingShow(slide);
+    });
+  });
+
+  // ─── Playlist slide — step through tracks via . / , (engine handles step state) ───
+  function resetPlaylistSlide(slide) {
+    const scroller = slide.querySelector('.pl-tracks');
+    if (scroller) scroller.scrollTop = 0;
+  }
+
+  // Clicking the big play button advances one step (same as pressing .)
+  document.querySelectorAll('.playlist-slide .pl-play-big').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextStep();
     });
   });
 
