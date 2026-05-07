@@ -1091,11 +1091,17 @@ html[data-theme='light'] .theme-toggle {
 
 /* ════════════════════════════════════════════════════════════════════
    NOW PLAYING SLIDE — Spotify app mock
+   Stays dark in BOTH themes — represents the actual Spotify app screen.
    ════════════════════════════════════════════════════════════════════ */
-.nowplay {
+.slide.nowplay,
+html[data-theme='light'] .slide.nowplay {
   background: linear-gradient(180deg, #1f5c44 0%, #0c2c20 38%, #050d09 78%, #000 100%);
   color: #fff;
 }
+html[data-theme='light'] .slide.nowplay .story-seg          { background: rgba(255,255,255,.22); }
+html[data-theme='light'] .slide.nowplay .story-seg::after   { background: rgba(255,255,255,.96); }
+html[data-theme='light'] .slide.nowplay .story-seg.curr::after { background: #fff; box-shadow: 0 0 8px rgba(255,255,255,.4); }
+html[data-theme='light'] .slide.nowplay .corner-num         { color: #fff; opacity: .06; }
 .nowplay .slide-inner {
   padding: 24px 56px 26px;
   display: flex;
@@ -1264,7 +1270,8 @@ html[data-theme='light'] .theme-toggle {
   position: absolute; left: 0; top: 0; bottom: 0;
   background: #fff;
   border-radius: 2px;
-  width: 6%;
+  /* 3.8% = 0:08 / 3:30 — JS keeps this in sync. */
+  width: 3.8%;
   transition: width 0s linear, background-color .3s ease;
 }
 .np-progress-thumb {
@@ -1273,18 +1280,13 @@ html[data-theme='light'] .theme-toggle {
   width: 12px; height: 12px;
   border-radius: 50%;
   background: #fff;
-  left: 6%;
+  left: 3.8%;
   transition: left 0s linear, background-color .3s ease;
 }
-/* When playing: slider fills to 100% over 2.5s (matches JS NP_SLIDER_MS) */
-.nowplay.playing .np-progress-fill {
-  width: 100%;
-  transition: width 2.5s linear, background-color .3s ease;
-  background: var(--accent2);
-}
+/* When playing: visual hint that the bar is now active (turns green).
+   Width / position is animated by JS at real-time pace, not by CSS. */
+.nowplay.playing .np-progress-fill,
 .nowplay.playing .np-progress-thumb {
-  left: 100%;
-  transition: left 2.5s linear, background-color .3s ease;
   background: var(--accent2);
 }
 .np-progress-time {
@@ -1343,7 +1345,6 @@ html[data-theme='light'] .theme-toggle {
 
 /* ─── Bottom secondary actions row (lyrics / queue / device) ─── */
 .np-secondary {
-  display: flex; align-items: center; justify-content: space-between;
   padding-top: 10px;
   border-top: 1px solid rgba(255,255,255,.07);
   margin-top: 6px;

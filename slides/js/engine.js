@@ -135,18 +135,20 @@
   }
 
   // ─── Now Playing cinematic play sequence ───
-  const NP_FROM_SEC    = 8;     // current track time (0:08)
-  const NP_TO_SEC      = 1200;  // total track length (20:00)
-  const NP_SLIDER_MS   = 2500;  // slider fill duration (matches CSS transition)
-  const NP_CURSOR_DELAY  = 250; // ms to wait before cursor starts moving
-  const NP_CURSOR_TRAVEL = 1000; // ms cursor takes to reach heart
-  const NP_TOTAL_MS    = 3500;  // total time before auto-advance
+  const NP_FROM_SEC    = 8;    // initial track time (0:08)
+  const NP_TO_SEC      = 210;  // track length (3:30) — typical pop song
+  const NP_TOTAL_MS    = 3500; // total cinematic, then auto-advance
+  const NP_CURSOR_DELAY  = 250; // delay before cursor starts moving
+  const NP_CURSOR_TRAVEL = 1000; // cursor travel time
 
   function fmtTime(sec) {
     sec = Math.max(0, Math.round(sec));
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${m}:${String(s).padStart(2,'0')}`;
+  }
+  function npStartPercent() {
+    return (NP_FROM_SEC / NP_TO_SEC) * 100;
   }
 
   // Position in slide-internal coords (0..960, 0..540) accounting for the scaler
@@ -186,26 +188,39 @@
       times[0].textContent = fmtTime(NP_FROM_SEC);
       times[1].textContent = '-' + fmtTime(NP_TO_SEC - NP_FROM_SEC);
     }
+    // Slider back to start position
+    const fill  = slide.querySelector('.np-progress-fill');
+    const thumb = slide.querySelector('.np-progress-thumb');
+    const startPct = npStartPercent();
+    if (fill)  { fill.style.transition = 'none'; fill.style.width = startPct + '%'; }
+    if (thumb) { thumb.style.transition = 'none'; thumb.style.left = startPct + '%'; }
   }
 
   function startNowPlayingShow(slide) {
     if (slide.classList.contains('playing')) return;
 
-    // 1. Slide-level .playing → swaps icon to ⏸, fills slider via CSS
+    // 1. Slide-level .playing → swaps icon to ⏸, slider turns green via CSS
     slide.classList.add('playing');
 
-    // 2. Animate time counters in sync with slider
+    // 2. Real-time playback: time advances 1s per 1s, slider follows.
+    //    Track is 3:30, so during a 3.5s cinematic the slider barely moves —
+    //    that's intentional, it should feel like the song is just starting.
     const times = slide.querySelectorAll('.np-progress-time span');
-    if (times.length >= 2) {
-      const start = performance.now();
-      (function tick(now) {
-        const t = Math.min(1, ((now || performance.now()) - start) / NP_SLIDER_MS);
-        const cur = NP_FROM_SEC + (NP_TO_SEC - NP_FROM_SEC) * t;
+    const fill  = slide.querySelector('.np-progress-fill');
+    const thumb = slide.querySelector('.np-progress-thumb');
+    const startTs = performance.now();
+    (function tick(now) {
+      const elapsedSec = ((now || performance.now()) - startTs) / 1000;
+      const cur = Math.min(NP_TO_SEC, NP_FROM_SEC + elapsedSec);
+      const pct = (cur / NP_TO_SEC) * 100;
+      if (times.length >= 2) {
         times[0].textContent = fmtTime(cur);
         times[1].textContent = '-' + fmtTime(NP_TO_SEC - cur);
-        if (t < 1) requestAnimationFrame(tick);
-      })();
-    }
+      }
+      if (fill)  fill.style.width = pct + '%';
+      if (thumb) thumb.style.left = pct + '%';
+      if (elapsedSec * 1000 < NP_TOTAL_MS && cur < NP_TO_SEC) requestAnimationFrame(tick);
+    })();
 
     // 3. Cursor appears at play button, moves to heart, clicks
     const playBtn = slide.querySelector('.np-play');
