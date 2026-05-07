@@ -1126,7 +1126,25 @@ html[data-theme='light'] .theme-toggle {
   cursor: pointer;
   line-height: 1;
 }
-.np-heart.liked { color: var(--accent); }
+
+/* Heart icon — outlined → filled green with bounce */
+.np-heart {
+  display: inline-block;
+  transform-origin: center center;
+  transition: color .35s ease;
+}
+.np-heart::before { content: '♡'; }
+.np-heart.liked {
+  color: var(--accent);
+  animation: heart-burst .55s cubic-bezier(.36,1.6,.42,1.4);
+}
+.np-heart.liked::before { content: '♥'; }
+@keyframes heart-burst {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.55); }
+  60%  { transform: scale(.92); }
+  100% { transform: scale(1.05); }
+}
 
 /* ─── Progress bar ─── */
 .np-progress { display: flex; flex-direction: column; gap: 6px; }
@@ -1141,7 +1159,7 @@ html[data-theme='light'] .theme-toggle {
   background: #fff;
   border-radius: 2px;
   width: 6%;
-  transition: width 1s ease-out;
+  transition: width 0s linear, background-color .3s ease;
 }
 .np-progress-thumb {
   position: absolute;
@@ -1150,7 +1168,18 @@ html[data-theme='light'] .theme-toggle {
   border-radius: 50%;
   background: #fff;
   left: 6%;
-  transition: left 1s ease-out;
+  transition: left 0s linear, background-color .3s ease;
+}
+/* When playing: slider fills to 100% over 2s */
+.nowplay.playing .np-progress-fill {
+  width: 100%;
+  transition: width 2s linear, background-color .3s ease;
+  background: var(--accent2);
+}
+.nowplay.playing .np-progress-thumb {
+  left: 100%;
+  transition: left 2s linear, background-color .3s ease;
+  background: var(--accent2);
 }
 .np-progress-time {
   display: flex; justify-content: space-between;
@@ -1182,11 +1211,20 @@ html[data-theme='light'] .theme-toggle {
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; line-height: 1;
   box-shadow: 0 4px 14px rgba(0,0,0,.35);
-  transition: transform .2s, box-shadow .2s;
+  transition: transform .2s, box-shadow .2s, background-color .25s ease;
   cursor: pointer;
 }
 .np-play:hover { transform: scale(1.06); }
-.np-play::before { content: '▶'; transform: translateX(1px); }
+.np-play::before {
+  content: '▶'; transform: translateX(1px);
+  transition: transform .15s ease;
+}
+.np-play.playing {
+  background: var(--accent);
+}
+.np-play.playing::before {
+  content: '⏸'; transform: translateX(0);
+}
 
 /* ─── Bottom secondary actions row (lyrics / queue / device) ─── */
 .np-secondary {
@@ -1235,6 +1273,9 @@ html[data-theme='light'] .theme-toggle {
 .nowplay.active .np-secondary { animation-delay: .55s; }
 .nowplay.active .np-play {
   animation: np-info-up .55s ease-out backwards .45s, np-play-pulse 2.6s ease-in-out 1.6s infinite;
+}
+.nowplay.active.playing .np-play {
+  animation: none;
 }
 
 @keyframes np-cover-in {

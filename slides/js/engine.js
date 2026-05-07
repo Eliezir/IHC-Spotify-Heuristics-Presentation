@@ -130,7 +130,67 @@
     });
     // Animate counters
     runCounters(slides[idx]);
+    // Reset Now Playing state when navigating back to it
+    if (slides[idx].classList.contains('nowplay')) resetNowPlaying(slides[idx]);
   }
+
+  // ─── Now Playing cinematic play sequence ───
+  const NP_FROM_SEC = 8;     // current track time (0:08)
+  const NP_TO_SEC   = 1200;  // total track length (20:00)
+  const NP_DURATION = 2000;  // animation duration in ms (matches CSS slider transition)
+
+  function fmtTime(sec) {
+    sec = Math.max(0, Math.round(sec));
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m}:${String(s).padStart(2,'0')}`;
+  }
+
+  function resetNowPlaying(slide) {
+    slide.classList.remove('playing');
+    const heart = slide.querySelector('.np-heart');
+    if (heart) heart.classList.remove('liked');
+    const times = slide.querySelectorAll('.np-progress-time span');
+    if (times.length >= 2) {
+      times[0].textContent = fmtTime(NP_FROM_SEC);
+      times[1].textContent = '-' + fmtTime(NP_TO_SEC - NP_FROM_SEC);
+    }
+  }
+
+  function startNowPlayingShow(slide) {
+    if (slide.classList.contains('playing')) return;
+    // 1. Heart fills with bounce
+    const heart = slide.querySelector('.np-heart');
+    if (heart) heart.classList.add('liked');
+    // 2 + 3. Slide-level .playing → swaps icon to ⏸, fills slider via CSS
+    slide.classList.add('playing');
+    // 4. Animate the time counters
+    const times = slide.querySelectorAll('.np-progress-time span');
+    if (times.length >= 2) {
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - start) / NP_DURATION);
+        const cur = NP_FROM_SEC + (NP_TO_SEC - NP_FROM_SEC) * t;
+        times[0].textContent = fmtTime(cur);
+        times[1].textContent = '-' + fmtTime(NP_TO_SEC - cur);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    // 5. Auto-advance after the slider reaches the end
+    setTimeout(() => {
+      next();
+    }, NP_DURATION + 200);
+  }
+
+  // Wire up the play button on the Now Playing slide
+  document.querySelectorAll('.nowplay .np-play').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const slide = btn.closest('.nowplay');
+      if (slide) startNowPlayingShow(slide);
+    });
+  });
 
   function next() {
     if (current < total - 1) { current++; show(current); }
