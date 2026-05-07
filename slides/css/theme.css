@@ -764,11 +764,8 @@ html[data-theme='light'] .theme-toggle {
 
 /* ════════════════════════════════════════════════════════════════════
    WRAPPED SLIDES — bold, vibrant, oversized
+   .slide already has position:absolute + overflow:hidden — don't override
    ════════════════════════════════════════════════════════════════════ */
-.wrapped {
-  position: relative;
-  overflow: hidden;
-}
 .wrapped .slide-inner {
   padding: 60px 56px 44px;
   position: relative;
