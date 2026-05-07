@@ -845,33 +845,125 @@
       </div>
 
 
-      <!-- ═══ SLIDE 14 — F2 OVERVIEW ═══ -->
-      <div class="slide s-mid">
+      <!-- ═══ SLIDE 13 — F2 · GERENCIAMENTO DE PLAYLISTS (Album cover) ═══ -->
+      <div class="slide playlist-slide">
         <div class="slide-inner">
-          <div class="section-header">
-            <div class="section-num">F2</div>
-            <div class="section-info">
-              <div class="section-label">Funcionalidade 2 · 10 problemas — bloco mais denso</div>
-              <div class="section-title">Gerenciamento de Playlists</div>
+          <div class="pl-header">
+            <div class="pl-cover has-image">
+              <img src="images/f2-playlists.png" alt="F2 · Gerenciamento de Playlists — Inspeção Heurística no Spotify">
+            </div>
+            <div class="pl-info">
+              <div class="pl-type">Album · Funcionalidade 2</div>
+              <div class="pl-title" style="font-size:42px;">F2 · Gerenciamento de Playlists</div>
+              <div class="pl-desc">O bloco mais denso da inspeção. Nenhum problema catastrófico, mas <strong>P 2.2</strong> (menu sobrecarregado) e <strong>P 2.5</strong> (inconsistência no desfazer) puxam a fila. Heurísticas dominantes: H1, H4, H5, H6, H7.</div>
+              <div class="pl-meta">
+                <strong>Spotify Mobile · iOS</strong>
+                <span class="pl-dot"></span>
+                <span><strong>10</strong> faixas</span>
+                <span class="pl-dot"></span>
+                <span>~5 min</span>
+              </div>
             </div>
           </div>
-          <p style="font-size:13px;color:var(--ink3);line-height:1.5;max-width:820px;margin-bottom:10px;">
-            Nenhum problema catastrófico identificado. Os problemas mais relevantes são <strong style="color:var(--ink);">P 2.2</strong> (menu sobrecarregado) e <strong style="color:var(--ink);">P 2.5</strong> (inconsistência no desfazer). Heurísticas dominantes: H1, H4, H5, H6, H7.
-          </p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;">
-            <div class="p-row"><span class="p-id">2.1</span><div class="p-text">Pastas sem personalização visual<span class="p-h">H4·H5·H7</span></div><div class="p-meta"><span class="sev sev-1">1</span></div></div>
-            <div class="p-row"><span class="p-id">2.6</span><div class="p-text">Reordenação acidental durante scroll<span class="p-h">H3</span></div><div class="p-meta"><span class="sev sev-2">2</span></div></div>
-            <div class="p-row"><span class="p-id">2.2</span><div class="p-text">Excesso de opções não agrupadas no menu<span class="p-h">H4·H6·H7</span></div><div class="p-meta"><span class="sev sev-3">3</span></div></div>
-            <div class="p-row"><span class="p-id">2.7</span><div class="p-text">Ícones de remover/reordenar pouco intuitivos<span class="p-h">H5</span></div><div class="p-meta"><span class="sev sev-1">1</span></div></div>
-            <div class="p-row"><span class="p-id">2.3</span><div class="p-text">Carrossel horizontal de ações oculta opções<span class="p-h">H1·H5·H7</span></div><div class="p-meta"><span class="sev sev-1">1</span></div></div>
-            <div class="p-row"><span class="p-id">2.8</span><div class="p-text">Ausência de seleção múltipla<span class="p-h">H6</span></div><div class="p-meta"><span class="sev sev-1">1</span></div></div>
-            <div class="p-row"><span class="p-id">2.4</span><div class="p-text">Busca interna da playlist oculta<span class="p-h">H1·H5·H6·H10</span></div><div class="p-meta"><span class="sev sev-2">2</span></div></div>
-            <div class="p-row"><span class="p-id">2.9</span><div class="p-text">Playlist pública por padrão na criação<span class="p-h">H1·H8</span></div><div class="p-meta"><span class="sev sev-2">2</span></div></div>
-            <div class="p-row"><span class="p-id">2.5</span><div class="p-text">Ausência de "Desfazer" ao remover músicas<span class="p-h">H3·H4·H8</span></div><div class="p-meta"><span class="sev sev-3">3</span></div></div>
-            <div class="p-row"><span class="p-id">2.10</span><div class="p-text">Descrição/adicionar músicas mal posicionados<span class="p-h">H1·H4</span></div><div class="p-meta"><span class="sev sev-1">1</span></div></div>
+
+          <div class="pl-actions">
+            <span class="pl-play-big" aria-label="Tocar"></span>
+            <span class="pl-icon" aria-label="Curtir">♡</span>
+            <span class="pl-icon" aria-label="Compartilhar">↗</span>
+            <span class="pl-icon" aria-label="Mais">⋯</span>
+          </div>
+
+          <div class="pl-tracklist">
+            <div class="pl-track-header">
+              <span class="pl-h-num">#</span>
+              <span class="pl-h-title">Título</span>
+              <span class="pl-h-dur">⏱</span>
+            </div>
+            <div class="pl-tracks">
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">1</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.1 · Pastas sem personalização visual</div>
+                  <div class="pl-track-subtitle">H4 · H5 · H7 · severidade 1</div>
+                </div>
+                <span class="pl-track-duration">0:30</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">2</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.2 · Excesso de opções não agrupadas no menu</div>
+                  <div class="pl-track-subtitle">H4 · H6 · H7 · severidade 3 · 3 avaliadores</div>
+                </div>
+                <span class="pl-track-duration">0:50</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">3</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.3 · Carrossel horizontal oculta opções</div>
+                  <div class="pl-track-subtitle">H1 · H5 · H7 · severidade 1</div>
+                </div>
+                <span class="pl-track-duration">0:30</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">4</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.4 · "Find in playlist" invisível</div>
+                  <div class="pl-track-subtitle">H1 · H5 · H6 · H10 · severidade 2</div>
+                </div>
+                <span class="pl-track-duration">0:35</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">5</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.5 · Ausência de "Desfazer" ao remover</div>
+                  <div class="pl-track-subtitle">H3 · H4 · H8 · severidade 3</div>
+                </div>
+                <span class="pl-track-duration">0:45</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">6</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.6 · Reordenação acidental durante scroll</div>
+                  <div class="pl-track-subtitle">H3 · severidade 2</div>
+                </div>
+                <span class="pl-track-duration">0:30</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">7</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.7 · Ícones de remover/reordenar pouco intuitivos</div>
+                  <div class="pl-track-subtitle">H5 · severidade 1</div>
+                </div>
+                <span class="pl-track-duration">0:30</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">8</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.8 · Ausência de seleção múltipla</div>
+                  <div class="pl-track-subtitle">H6 · severidade 1</div>
+                </div>
+                <span class="pl-track-duration">0:30</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">9</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.9 · Playlist pública por padrão na criação</div>
+                  <div class="pl-track-subtitle">H1 · H8 · severidade 2</div>
+                </div>
+                <span class="pl-track-duration">0:35</span>
+              </div>
+              <div class="pl-track">
+                <div class="pl-track-num-cell"><span class="pl-track-num">10</span></div>
+                <div class="pl-track-meta">
+                  <div class="pl-track-title">P 2.10 · Descrição/adicionar músicas mal posicionados</div>
+                  <div class="pl-track-subtitle">H1 · H4 · severidade 1</div>
+                </div>
+                <span class="pl-track-duration">0:30</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="corner-num">14</div>
+        <div class="corner-num">13</div>
       </div>
 
       <!-- ═══ SLIDE 15 — PROBLEMAS 2.1 a 2.4 (DESCOBRIBILIDADE) ═══ -->

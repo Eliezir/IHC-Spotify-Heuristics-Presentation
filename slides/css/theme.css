@@ -1698,8 +1698,24 @@ html[data-theme='light'] .slide.playlist-slide .corner-num         { color: #fff
 }
 .pl-actions .pl-icon:hover { color: #fff; }
 
-/* Tracklist wrapper holds header (fixed) + scrollable rows */
-.pl-tracklist { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+/* Tracklist wrapper holds header (fixed) + scrollable rows.
+   The fade gradient at bottom hints visually that there is more below. */
+.pl-tracklist {
+  display: flex; flex-direction: column;
+  min-height: 0; flex: 1;
+  position: relative;
+}
+.pl-tracklist::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 14px;  /* leave room for the visible scrollbar */
+  bottom: 0;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.55) 65%, rgba(0,0,0,.85));
+  pointer-events: none;
+  border-radius: 0 0 6px 6px;
+  z-index: 2;
+}
 .pl-tracks {
   display: flex; flex-direction: column;
   gap: 4px;
@@ -1709,19 +1725,27 @@ html[data-theme='light'] .slide.playlist-slide .corner-num         { color: #fff
   min-height: 0;
   padding-right: 4px;
   padding-bottom: 32px;
-  /* Firefox scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,.22) transparent;
+  /* Firefox scrollbar — auto width + visible track */
+  scrollbar-width: auto;
+  scrollbar-color: rgba(255,255,255,.5) rgba(255,255,255,.08);
   scroll-behavior: smooth;
 }
-/* WebKit scrollbar */
-.pl-tracks::-webkit-scrollbar { width: 6px; }
-.pl-tracks::-webkit-scrollbar-track { background: transparent; }
-.pl-tracks::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,.18);
-  border-radius: 3px;
+/* WebKit scrollbar — thicker + more opaque so it's clearly visible */
+.pl-tracks::-webkit-scrollbar { width: 10px; }
+.pl-tracks::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.06);
+  border-radius: 5px;
 }
-.pl-tracks::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.32); }
+.pl-tracks::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.4);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.pl-tracks::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,.6);
+  background-clip: padding-box;
+}
 
 .pl-track-header {
   display: grid;
