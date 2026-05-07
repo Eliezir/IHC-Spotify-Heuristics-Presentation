@@ -451,45 +451,90 @@
         <div class="corner-num">06</div>
       </div>
 
-      <!-- ═══ SLIDE 7 — COMO CONDUZIMOS ═══ -->
+      <!-- ═══ SLIDE 7 — COMO CONDUZIMOS (Album Credits) ═══ -->
       <div class="slide s-dark2">
         <div class="slide-inner">
           <div class="slide-tag">Bloco 3 · Método aplicado</div>
           <h2 class="section">Como conduzimos a inspeção</h2>
           <div class="divider"></div>
-          <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:24px;">
-            <div>
-              <h3 class="subsection" style="font-size:14px;color:var(--accent2);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">Avaliadores</h3>
-              <div class="evaluators" style="margin-bottom:20px;">
-                <div class="evaluator"><div class="avatar">EM</div>Eliezir <span class="e-count">8</span></div>
-                <div class="evaluator"><div class="avatar">YG</div>Yury <span class="e-count">9</span></div>
-                <div class="evaluator"><div class="avatar">EC</div>Eduardo <span class="e-count">9</span></div>
-                <div class="evaluator"><div class="avatar">TG</div>Thomas <span class="e-count">7</span></div>
+
+          <div class="credits">
+            <!-- Sidebar estilo álbum: capa + artistas embaixo -->
+            <div class="credits-album">
+              <div class="cr-cover">
+                <img src="images/grupo.png" alt="Interação Humano-Computador · Turma IHC · IFAL 2026">
               </div>
-              <h3 class="subsection" style="font-size:14px;color:var(--accent2);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">Funcionalidades inspecionadas</h3>
-              <div style="display:flex;flex-direction:column;gap:8px;">
-                <div class="card accent" style="padding:10px 14px;flex-direction:row;align-items:center;gap:12px;">
-                  <span class="play-icon"></span>
-                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">F1 · Busca de música</div><div style="font-size:11px;color:var(--ink3);">4 problemas</div></div>
-                </div>
-                <div class="card accent" style="padding:10px 14px;flex-direction:row;align-items:center;gap:12px;">
-                  <span class="play-icon"></span>
-                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">F2 · Gerenciamento de playlists</div><div style="font-size:11px;color:var(--ink3);">10 problemas</div></div>
-                </div>
-                <div class="card accent" style="padding:10px 14px;flex-direction:row;align-items:center;gap:12px;">
-                  <span class="play-icon"></span>
-                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">F3 · Mixagem (Edit Transition + Blend)</div><div style="font-size:11px;color:var(--ink3);">4 problemas</div></div>
-                </div>
+              <div class="cr-album-artists">
+                <div class="cr-person"><span class="cr-avatar">EM</span>Eliezir Moreira</div>
+                <div class="cr-person"><span class="cr-avatar">YG</span>Yury Galvão</div>
+                <div class="cr-person"><span class="cr-avatar">EC</span>Eduardo Calado</div>
+                <div class="cr-person"><span class="cr-avatar">TG</span>Thomas Gabriel</div>
               </div>
             </div>
-            <div>
-              <h3 class="subsection" style="font-size:14px;color:var(--accent2);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">Processo</h3>
-              <ol class="bullet-list" style="counter-reset:step;">
-                <li><div><strong style="color:var(--ink);">Inspeção individual</strong> — cada avaliador examinou as 3 funcionalidades de forma isolada, registrando problemas, heurísticas violadas e severidade proposta.</div></li>
-                <li><div><strong style="color:var(--ink);">Reunião de calibração</strong> — discussão coletiva de cada problema, com fusão de duplicatas e ajuste de severidade quando havia divergência.</div></li>
-                <li><div><strong style="color:var(--ink);">Consolidação</strong> — escrita do relatório final com a lista mesclada e a tabela-resumo dos 18 problemas únicos.</div></li>
-              </ol>
-              <p class="attr" style="margin-top:14px;">Plataforma · Spotify mobile (iOS) · Premium e Free</p>
+
+            <!-- Lado direito: Method · Tracks · Recorded at empilhados -->
+            <div class="credits-info">
+              <div class="credits-section">
+                <div class="credits-label">Method</div>
+                <ol class="credits-method">
+                  <li>
+                    <div>
+                      <strong>Inspeção individual</strong>
+                      <span>Cada avaliador examinou as 3 funcionalidades isoladamente — registrando problemas, heurísticas violadas e severidade proposta.</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <strong>Reunião de calibração</strong>
+                      <span>Discussão coletiva de cada problema, fusão de duplicatas e ajuste de severidade quando havia divergência.</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <strong>Consolidação</strong>
+                      <span>Escrita do relatório final mesclado com tabela-resumo dos problemas únicos.</span>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+
+              <div class="credits-bottom">
+                <div class="credits-section">
+                  <div class="credits-label">Tracks inspecionadas</div>
+                  <div class="credits-tracks">
+                    <div class="cr-track">
+                      <span class="cr-tnum">1</span>
+                      <span class="cr-tname">F1 · Busca de música</span>
+                    </div>
+                    <div class="cr-track">
+                      <span class="cr-tnum">2</span>
+                      <span class="cr-tname">F2 · Gerenciamento de playlists</span>
+                    </div>
+                    <div class="cr-track">
+                      <span class="cr-tnum">3</span>
+                      <span class="cr-tname">F3 · Mixagem · Edit Transition + Blend</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="credits-section">
+                  <div class="credits-label">Recorded at</div>
+                  <div class="credits-platform">
+                    <div class="cp-row">
+                      <span class="cp-key">Plataforma</span>
+                      <span class="cp-val">Spotify Mobile · iOS</span>
+                    </div>
+                    <div class="cp-row">
+                      <span class="cp-key">Plano</span>
+                      <span class="cp-val">Premium + Free</span>
+                    </div>
+                    <div class="cp-row">
+                      <span class="cp-key">Período</span>
+                      <span class="cp-val">2026.1 · IFAL</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
