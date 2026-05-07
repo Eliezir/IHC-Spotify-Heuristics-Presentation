@@ -1463,6 +1463,92 @@ html[data-theme='light'] .slide.nowplay .corner-num         { color: #fff; opaci
 }
 
 /* ════════════════════════════════════════════════════════════════════
+   NOW PLAYING — INTRO VARIANT (block first-page)
+   Compact cover · track info · controls · "Sobre a faixa" panel below.
+   ════════════════════════════════════════════════════════════════════ */
+.nowplay.nowplay-intro .slide-inner {
+  padding: 26px 56px 56px;
+  justify-content: flex-start;
+}
+.nowplay.nowplay-intro .np-content {
+  grid-template-columns: 156px 1fr;
+  gap: 24px;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-bottom: 18px;
+}
+.nowplay.nowplay-intro .np-cover {
+  width: 156px; height: 156px;
+  padding: 0;
+  /* Image fills the cover; remove the inner gradient/text styling */
+  background: #0f1812;
+}
+.nowplay.nowplay-intro .np-cover::after { display: none; }
+.nowplay.nowplay-intro .np-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+.nowplay.nowplay-intro .np-track-title { font-size: 24px; line-height: 1.05; }
+.nowplay.nowplay-intro .np-track-artist { font-size: 13px; }
+.nowplay.nowplay-intro .np-info { gap: 12px; }
+.nowplay.nowplay-intro .np-controls { gap: 22px; margin-top: 2px; }
+.nowplay.nowplay-intro .np-play { width: 48px; height: 48px; font-size: 14px; }
+.nowplay.nowplay-intro .np-secondary { display: none; }
+
+/* About panel (Spotify-style "Sobre a faixa") */
+.np-about {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 18px;
+  margin-top: 6px;
+}
+.np-about-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 12px;
+}
+.np-about-quote {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+  color: #fff;
+  margin-bottom: 6px;
+  max-width: 760px;
+}
+.np-about-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 16px;
+}
+.np-about-points { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.np-about-points li {
+  font-size: 13px;
+  color: rgba(255,255,255,.85);
+  line-height: 1.5;
+  display: flex; gap: 10px;
+}
+.np-about-points li::before {
+  content: '→';
+  color: var(--accent2);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+.np-about-points li strong { color: #fff; font-weight: 700; }
+
+.nowplay.nowplay-intro.active .np-about {
+  animation: np-info-up .55s ease-out backwards .55s;
+}
+
+/* ════════════════════════════════════════════════════════════════════
    PLAYLIST SLIDE — Spotify playlist screen mock
    Stays dark in any theme.
    ════════════════════════════════════════════════════════════════════ */
@@ -1708,6 +1794,215 @@ html[data-theme='light'] .slide.playlist-slide .corner-num         { color: #fff
 
 @keyframes pl-rise {
   from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   WRAPPED INTRO — Spotify Wrapped-style block first-page
+   Bold violet bg · rotated decor number · striped frame on photo ·
+   two ranked lists · big bottom stat · footer branding.
+   ════════════════════════════════════════════════════════════════════ */
+.slide.wrapped-intro,
+html[data-theme='light'] .slide.wrapped-intro {
+  background: linear-gradient(155deg, #a07cff 0%, #7c4cf5 35%, #5e3bff 70%, #3a1ec0 100%);
+  color: #fff;
+  overflow: hidden;
+}
+html[data-theme='light'] .slide.wrapped-intro .story-seg          { background: rgba(0,0,0,.22); }
+html[data-theme='light'] .slide.wrapped-intro .story-seg::after   { background: rgba(0,0,0,.96); }
+html[data-theme='light'] .slide.wrapped-intro .story-seg.curr::after { background: #000; box-shadow: 0 0 8px rgba(0,0,0,.3); }
+html[data-theme='light'] .slide.wrapped-intro .corner-num         { color: #fff; opacity: .08; }
+.wrapped-intro .corner-num { color: #fff; opacity: .1; }
+
+.wrapped-intro .slide-inner {
+  padding: 36px 56px 52px;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+}
+
+/* Decorative giant year/track number — vertical, outlined */
+.wri-decor {
+  position: absolute;
+  top: 30px;
+  left: 24px;
+  writing-mode: vertical-rl;
+  font-family: 'Inter', sans-serif;
+  font-size: 120px; font-weight: 900;
+  line-height: .94;
+  letter-spacing: -.05em;
+  color: transparent;
+  -webkit-text-stroke: 2.5px rgba(255,255,255,.95);
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+}
+
+/* Header row: title (left) + photo (right) */
+.wri-header {
+  display: grid;
+  grid-template-columns: 1fr 232px;
+  gap: 28px;
+  align-items: end;
+  position: relative;
+  z-index: 2;
+  padding-left: 96px; /* leave room for rotated decor */
+}
+
+.wri-header-text {
+  display: flex; flex-direction: column;
+  align-self: end;
+  padding-bottom: 6px;
+}
+.wri-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 12px;
+}
+.wri-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 50px; font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.04em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.wri-subtitle {
+  font-size: 14px; font-weight: 600;
+  color: rgba(255,255,255,.85);
+  line-height: 1.4;
+  max-width: 520px;
+}
+
+/* Striped frame around photo */
+.wri-photo {
+  width: 232px; height: 232px;
+  position: relative;
+  border-radius: 4px;
+  /* Diagonal stripes around the photo (Wrapped-style) */
+  background: repeating-linear-gradient(45deg, #000 0 10px, #fff 10px 20px);
+  padding: 14px;
+  box-shadow: 0 24px 50px rgba(0,0,0,.35);
+}
+.wri-photo-inner {
+  width: 100%; height: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.wri-photo-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Two-column stat lists */
+.wri-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  padding-left: 96px;
+  margin-top: 4px;
+  z-index: 2;
+}
+.wri-stat-block { display: flex; flex-direction: column; }
+.wri-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -.005em;
+}
+.wri-stat-block ol {
+  list-style: none; counter-reset: wrii;
+  padding: 0; margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; line-height: 1.5;
+  color: rgba(255,255,255,.95);
+  font-weight: 600;
+}
+.wri-stat-block ol li {
+  counter-increment: wrii;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.wri-stat-block ol li::before {
+  content: counter(wrii);
+  color: #fff;
+  font-weight: 800;
+}
+
+/* Big bottom stat */
+.wri-bigstat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  padding-left: 96px;
+  align-self: end;
+  z-index: 2;
+}
+.wri-bigstat-block { display: flex; flex-direction: column; }
+.wri-bigstat-label {
+  font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 4px;
+}
+.wri-bigstat-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 36px; font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: #fff;
+}
+
+/* Footer branding */
+.wri-brand {
+  position: absolute;
+  bottom: 18px;
+  left: 56px; right: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.85);
+  z-index: 3;
+}
+.wri-brand-logo {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #1ed760;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 13px;
+  color: #000;
+  font-weight: 900;
+}
+
+/* Reveal animations */
+.wrapped-intro.active .wri-decor,
+.wrapped-intro.active .wri-photo,
+.wrapped-intro.active .wri-header-text,
+.wrapped-intro.active .wri-stats,
+.wrapped-intro.active .wri-bigstat,
+.wrapped-intro.active .wri-brand {
+  animation: wri-rise .6s cubic-bezier(.18,.9,.32,1.18) backwards;
+}
+.wrapped-intro.active .wri-decor       { animation-delay: .05s; }
+.wrapped-intro.active .wri-photo       { animation-delay: .15s; }
+.wrapped-intro.active .wri-header-text { animation-delay: .25s; }
+.wrapped-intro.active .wri-stats       { animation-delay: .40s; }
+.wrapped-intro.active .wri-bigstat     { animation-delay: .55s; }
+.wrapped-intro.active .wri-brand       { animation-delay: .65s; }
+
+@keyframes wri-rise {
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
