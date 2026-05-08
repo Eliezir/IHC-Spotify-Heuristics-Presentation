@@ -369,6 +369,10 @@
       <div class="id-content">
         <div class="id-counter"></div>
         <div class="id-frame"><div class="id-track"></div></div>
+        <div class="id-heuristics">
+          <div class="id-h-title">Heurísticas violadas</div>
+          <div class="id-h-table"></div>
+        </div>
         <div class="id-caption"></div>
         <div class="id-dots"></div>
       </div>
@@ -445,6 +449,20 @@
 
     const caption = imageDialog.querySelector('.id-caption');
     caption.textContent = dialogSlides[idx].dataset.caption || '';
+
+    const heuristicsBox = imageDialog.querySelector('.id-heuristics');
+    const heuristicsTable = imageDialog.querySelector('.id-h-table');
+    const rawH = dialogSlides[idx].dataset.heuristics || '';
+    if (rawH) {
+      heuristicsTable.innerHTML = rawH.split(';').map(item => {
+        const [code, name] = item.split(':');
+        return `<div class="id-h-row"><span class="id-h-code">${code.trim()}</span><span class="id-h-name">${(name || '').trim()}</span></div>`;
+      }).join('');
+      heuristicsBox.style.display = 'flex';
+    } else {
+      heuristicsTable.innerHTML = '';
+      heuristicsBox.style.display = 'none';
+    }
 
     const counter = imageDialog.querySelector('.id-counter');
     counter.textContent = `${idx + 1} / ${dialogSlides.length}`;
