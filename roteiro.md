@@ -28,7 +28,7 @@
 
 ## Bloco 0 — Abertura (30s)
 
-**Slide 1 — capa.** Título "Inspeção Heurística", subtítulo "Spotify — Mobile · iOS", grupo, disciplina.
+**Slide 1 — capa.** Título "Inspeção Heurística", subtítulo "Spotify — Mobile · ANDROID", grupo, disciplina.
 
 > "Boa tarde. Somos Eliezir, Yury, Eduardo e Thomas, e hoje vamos apresentar a **inspeção heurística** que conduzimos sobre o aplicativo Spotify, dentro da disciplina de IHC. Avaliamos três funcionalidades centrais e identificamos 18 problemas de usabilidade — é deles que a gente vai falar."
 
@@ -50,8 +50,9 @@
 > "Diferente de testes com usuários, a avaliação heurística é feita por avaliadores que comparam a interface contra um conjunto de princípios bem estabelecidos. É barato, rápido, e captura a maior parte dos problemas mais óbvios antes de gastar tempo de usuário real."
 
 ### Slide 4 — Por que usar
-- Detecta entre **55% e 75%** dos problemas com 3 a 5 avaliadores.
-- Custo baixo, executável em qualquer fase do projeto.
+- **Sem usuários**: inspeção feita por especialistas, dispensa recrutamento.
+- **Qualquer fase**: aplicável em wireframe, protótipo ou produto em produção.
+- Custo baixo, executável rapidamente — recomendação de Nielsen é 3–5 avaliadores, ~1 dia de trabalho cada.
 - Resultados acionáveis: cada problema vem com a heurística violada e severidade.
 
 ### Slide 5 — Severidade (escala 0–4)
@@ -77,7 +78,7 @@ Card por heurística (H1 a H10), com nome curto e uma frase de definição. Dest
 ### Slide 7 — Setup
 - 4 avaliadores: Yury, Eduardo, Eliezir, Thomas.
 - 3 funcionalidades: **Busca**, **Playlists**, **Mixagem**.
-- Plataforma: Spotify mobile (iOS).
+- Plataforma: Spotify mobile (ANDROID).
 - Cada avaliador inspecionou os 3 blocos individualmente; depois, mesclamos duplicatas em reunião de calibração.
 
 ### Slide 8 — Métricas
