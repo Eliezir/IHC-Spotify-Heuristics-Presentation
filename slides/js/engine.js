@@ -455,8 +455,12 @@
     const rawH = dialogSlides[idx].dataset.heuristics || '';
     if (rawH) {
       heuristicsTable.innerHTML = rawH.split(';').map(item => {
-        const [code, name] = item.split(':');
-        return `<div class="id-h-row"><span class="id-h-code">${code.trim()}</span><span class="id-h-name">${(name || '').trim()}</span></div>`;
+        const i1 = item.indexOf(':');
+        const i2 = i1 > -1 ? item.indexOf(':', i1 + 1) : -1;
+        const code = (i1 > -1 ? item.slice(0, i1) : item).trim();
+        const name = (i1 > -1 ? (i2 > -1 ? item.slice(i1 + 1, i2) : item.slice(i1 + 1)) : '').trim();
+        const why  = (i2 > -1 ? item.slice(i2 + 1) : '').trim();
+        return `<div class="id-h-row"><span class="id-h-code">${code}</span><div class="id-h-text"><span class="id-h-name">${name}</span>${why ? `<span class="id-h-why">${why}</span>` : ''}</div></div>`;
       }).join('');
       heuristicsBox.style.display = 'flex';
     } else {
